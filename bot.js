@@ -389,10 +389,54 @@ function callSendAPI(messageData) {
       if (!error && response.statusCode == 200) {
         //  var recipientId = body.recipient_id;
         // var messageId = body.message_id;
+           console.log("Successfully firebase4" + body);
+        if(body == "null"){
+             console.log("Successfully firebase5" + body);
+          
+        request(
+          {
+            uri: "https://getdev-b2c0b.firebaseio.com/company/1/chatbotCreateMessage/-O6fxO0RwankhfZhvnHq/options/.json",
 
-        console.log("Successfully firebase" + body);
+            method: "GET",
+          },
+          function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              //  var recipientId = body.recipient_id;
+              // var messageId = body.message_id;
+              var id = "7d15696d-95f8-4154-8e2b-e5dee1f8eafa";
+              console.log("Successfully firebase2: " + body + "  :  " + id);
+
+              var obj = JSON.parse(body);
+              var title = obj[id]["title"];
+              var route = obj[id]["routeStep"];
+              var type = obj[id]["type"];
+
+              console.error("body: " + title);
+
+              console.log("Successfully firebase" + body);
+              if (type == "chat") {
+                sendMsj("8370375226358762", title, route);
+
+                setTimeout(function () {
+                  validateFlow(body, route);
+                }, 1000);
+              }
+            } else {
+              console.error("Unable to send message.");
+              console.error(response);
+              console.error(error);
+            }
+          }
+        );
+          
+        }else{
+
+        console.log("Successfully firebase3" + body);
         idData = "-O6gAs7nZlg68hikKCiP";
         var obj = JSON.parse(body);
+          var lenght = obj.lenght;
+          console.error("lenght: "+length);
+          
         // var title = obj[id]["title"];
         var routeData = obj[idData]["routeStep"];
         //       var type = obj[id]["type"];
@@ -438,11 +482,13 @@ function callSendAPI(messageData) {
             }
           }
         );
+        }
       } else {
         console.error("Unable to send message.");
         console.error(response);
         console.error(error);
       }
+      
     }
   );
 
