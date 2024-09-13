@@ -213,7 +213,7 @@ function sendMsj(recipientId, messageText, route) {
 
   //if(route != null){
 
-  
+  console.log("routeSend: "+route);
   if(route != null){
     
       console.log("routestep: "+route);
@@ -240,16 +240,8 @@ function sendMsj(recipientId, messageText, route) {
         // var messageId = body.message_id;
 
         console.log("Successfully firebase");
-      } else {
-        console.error("Unable to send message.");
-        console.error(response);
-        console.error(error);
-      }
-    }
-  );
-  }
-
-  var messageData = {
+        
+        var messageData = {
     recipient: {
       id: recipientId,
     },
@@ -281,6 +273,16 @@ function sendMsj(recipientId, messageText, route) {
       }
     }
   );
+      } else {
+        console.error("Unable to send message.");
+        console.error(response);
+        console.error(error);
+      }
+    }
+  );
+  }
+
+  
  // }
 }
 /*
@@ -388,9 +390,9 @@ function validateFlow(body, id) {
       }
       var message = title.capitalize() + ":" + " \n\n" + listString;
 
-      setTimeout(function () {
+    //  setTimeout(function () {
         sendMsj("8370375226358762", message, route);
-      }, 500);
+     // }, 500);
     }
     //  sendMsj("8370375226358762",title);
   }
