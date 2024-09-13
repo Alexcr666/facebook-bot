@@ -283,15 +283,24 @@ function callSendAPI(messageData) {
 function validateFlow(body,id){
   var obj = JSON.parse(body);
         var title = obj[id]["title"];
-      var route =  obj[id]["routeStep"];
+  
+   var route = null;
+  if(obj[id]["routeStep"] != null){
+    route =  obj[id]["routeStep"];
+  }
               var type = obj[id]["type"];
       
       
        console.error("body: "+title);
 
       console.log("Successfully firebase"+body);
-      if(type = "chat"){
+      if(type == "chat"){
         sendMsj("8370375226358762",title);
+        if(route != null  ){
+          if(type == "chat"){
+        validateFlow(body,route);
+          }
+        }
         
         
      }
@@ -302,7 +311,7 @@ function callSendAPI(messageData) {
   
   
    request({
-    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/chatbotCreateMessage/-O6d8tHwE_wm3DGgI3hD/options/.json',
+    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/chatbotCreateMessage/-O6fxO0RwankhfZhvnHq/options/.json',
  
     method: 'GET',
 
@@ -313,7 +322,7 @@ function callSendAPI(messageData) {
      // var messageId = body.message_id;
       
      console.log("Successfully firebase"+body);
-     var id = "4963281a-fe77-4d89-a01f-5b23427e588b";
+     var id = "7d15696d-95f8-4154-8e2b-e5dee1f8eafa";
         var obj = JSON.parse(body);
         var title = obj[id]["title"];
       var route =  obj[id]["routeStep"];
@@ -323,7 +332,7 @@ function callSendAPI(messageData) {
        console.error("body: "+title);
 
       console.log("Successfully firebase"+body);
-      if(type = "chat"){
+      if(type == "chat"){
         sendMsj("8370375226358762",title);
         validateFlow(body,route);
         
