@@ -351,10 +351,84 @@ function validateFlow(body,id){
 }
 
 function callSendAPI(messageData) {
-
   
   
    request({
+    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/messageUsers/460500794363501/.json',
+ 
+    method: 'GET',
+
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+    //  var recipientId = body.recipient_id;
+     // var messageId = body.message_id;
+      
+     console.log("Successfully firebase"+body);
+     var id = "7d15696d-95f8-4154-8e2b-e5dee1f8eafa";
+        var obj = JSON.parse(body);
+       // var title = obj[id]["title"];
+      var route =  obj[id]["routeStep"];
+       //       var type = obj[id]["type"];
+      
+      
+     //  console.error("body: "+title);
+
+      console.log("Successfully firebase"+body);
+     
+      
+   //   var id = 
+      
+      request({
+    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/chatbotCreateMessage/-O6fxO0RwankhfZhvnHq/options/.json',
+ 
+    method: 'GET',
+
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+    //  var recipientId = body.recipient_id;
+     // var messageId = body.message_id;
+      
+     console.log("Successfully firebase"+body);
+    var id = route;
+        var obj = JSON.parse(body);
+        var title = obj[id]["title"];
+      var route =  obj[id]["routeStep"];
+              var type = obj[id]["type"];
+      
+      
+       console.error("body: "+title);
+
+      console.log("Successfully firebase"+body);
+      if(type == "chat"){
+        sendMsj("8370375226358762",title,route);
+        
+        setTimeout(function(){ validateFlow(body,route); }, 1000);
+        
+        
+        
+     }
+    } else {
+      console.error("Unable to send message.");
+      console.error(response);
+      console.error(error);
+    }
+  });
+      
+      
+      
+      
+    } else {
+      console.error("Unable to send message.");
+      console.error(response);
+      console.error(error);
+    }
+  });
+
+  
+  
+   /*request({
     uri: 'https://getdev-b2c0b.firebaseio.com/company/1/chatbotCreateMessage/-O6fxO0RwankhfZhvnHq/options/.json',
  
     method: 'GET',
@@ -390,7 +464,7 @@ function callSendAPI(messageData) {
       console.error(error);
     }
   });
-  
+  */
       
      /*  var messageData2 = {
          
