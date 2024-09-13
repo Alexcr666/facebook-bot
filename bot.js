@@ -388,7 +388,7 @@ var routeData;
 function callSendAPI(messageData) {
   request(
     {
-      uri: "https://getdev-b2c0b.firebaseio.com/company/1/messageUsers/460500794363501/.json",
+      uri: "https://getdev-b2c0b.firebaseio.com/company/1/messageUsers/"+recipientData+"/.json",
 
       method: "GET",
     },
@@ -495,11 +495,17 @@ function callSendAPI(messageData) {
     var keys = Object.keys(obj[id]["optionsStep"]);
     keys.forEach(function(key){
       console.log("datos: "+key);
-      if(key ==   messageReceip){
+      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
         
-        var value = obj[id]["optionsStep"]["key"];
+        var value = obj[id]["optionsStep"][key];
+ 
+          console.log("dato1: "+value);
         
-        
+        //sendMsj("8370375226358762", title, value);
+
+                setTimeout(function () {
+                  validateFlow(body, value);
+                }, 1000);
        
          }
     });
