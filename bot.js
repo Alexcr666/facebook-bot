@@ -211,7 +211,7 @@ function sendGenericMessage(recipientId) {
 }
 function sendMsj(recipientId, messageText, route) {
 
-  if(route != null){
+  //if(route != null){
   var messageData2 = {
     userId: userReceip,
     routeStep: route,
@@ -275,7 +275,7 @@ function sendMsj(recipientId, messageText, route) {
       }
     }
   );
-  }
+ // }
 }
 /*
 function callSendAPI(messageData) {
@@ -346,6 +346,8 @@ function validateFlow(body, id) {
   var route = null;
   if (obj[id]["routeStep"] != null) {
     route = obj[id]["routeStep"];
+  }else{
+    
   }
   var type = obj[id]["type"];
 
