@@ -71,6 +71,7 @@ app.post('/webhook', function (req, res) {
 });
 var  messageReceip;
 var userReceip;
+var recipientData;
 
 // Incoming events handling
 function receivedMessage(event) {
@@ -80,6 +81,7 @@ function receivedMessage(event) {
   var message = event.message;
   
   userReceip = senderID;
+  recipientData = recipientID;
   
 
   console.log("Received message for user %d and page %d at %d with message:", 
@@ -205,7 +207,7 @@ function callSendAPI(messageData) {
       
        var messageData2 = {
          
-         userId : userReceip, text : messageReceip
+         userId : userReceip, text : messageReceip,receipt:recipientData
        };
       
       request({
