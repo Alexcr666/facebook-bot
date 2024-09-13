@@ -218,21 +218,9 @@ function sendMsj( recipientId, messageText){
     }
   });
 }
-
+/*
 function callSendAPI(messageData) {
-/*  request({
-    uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
-    method: 'POST',
-    json: messageData
 
-  }, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var recipientId = body.recipient_id;
-      var messageId = body.message_id;
-
-      console.log("Successfully sent generic message with id %s to recipient %s", 
-        messageId, recipientId);*/
   
   
    request({
@@ -256,6 +244,7 @@ function callSendAPI(messageData) {
       console.log("Successfully firebase"+body);
       if(type = "chat"){
         sendMsj("8370375226358762",title);
+        
         
      }
     } else {
@@ -289,12 +278,71 @@ function callSendAPI(messageData) {
       console.error(error);
     }
   });
-   /* } else {
+   
+}*/
+
+
+function callSendAPI(messageData) {
+
+  
+  
+   request({
+    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/chatbotCreateMessage/-O6d8tHwE_wm3DGgI3hD/options/.json',
+ 
+    method: 'GET',
+
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+    //  var recipientId = body.recipient_id;
+     // var messageId = body.message_id;
+      
+     console.log("Successfully firebase"+body);
+     var id = "4963281a-fe77-4d89-a01f-5b23427e588b";
+        var obj = JSON.parse(body);
+        var title = obj[id]["title"];
+              var type = obj[id]["type"];
+      
+       console.error("body: "+title);
+
+      console.log("Successfully firebase"+body);
+      if(type = "chat"){
+        sendMsj("8370375226358762",title);
+        
+        
+     }
+    } else {
       console.error("Unable to send message.");
       console.error(response);
       console.error(error);
     }
-  });  */
+  });
+  
+      
+       var messageData2 = {
+         
+         userId : userReceip, text : messageReceip,receipt:recipientData
+       };
+      
+      request({
+    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/messageUsers.json',
+   // qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
+    method: 'POST',
+    json: messageData2
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+    //  var recipientId = body.recipient_id;
+     // var messageId = body.message_id;
+
+      console.log("Successfully firebase");
+    } else {
+      console.error("Unable to send message.");
+      console.error(response);
+      console.error(error);
+    }
+  });
+   
 }
 
 // Set Express to listen out for HTTP requests
