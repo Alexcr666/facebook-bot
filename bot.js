@@ -280,7 +280,22 @@ function callSendAPI(messageData) {
   });
    
 }*/
+function validateFlow(body,id){
+  var obj = JSON.parse(body);
+        var title = obj[id]["title"];
+      var route =  obj[id]["routeStep"];
+              var type = obj[id]["type"];
+      
+      
+       console.error("body: "+title);
 
+      console.log("Successfully firebase"+body);
+      if(type = "chat"){
+        sendMsj("8370375226358762",title);
+        
+        
+     }
+}
 
 function callSendAPI(messageData) {
 
@@ -301,13 +316,16 @@ function callSendAPI(messageData) {
      var id = "4963281a-fe77-4d89-a01f-5b23427e588b";
         var obj = JSON.parse(body);
         var title = obj[id]["title"];
+      var route =  obj[id]["routeStep"];
               var type = obj[id]["type"];
+      
       
        console.error("body: "+title);
 
       console.log("Successfully firebase"+body);
       if(type = "chat"){
         sendMsj("8370375226358762",title);
+        validateFlow(body,route);
         
         
      }
