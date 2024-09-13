@@ -341,23 +341,23 @@ function callSendAPI(messageData) {
 }*/
 function validateFlow(body, id) {
   var obj = JSON.parse(body);
-  
-  
-  
-  
   var title = obj[id]["title"];
 
   var route = null;
+  
+  console.log("routeStep: "+obj[id]["routeStep"]);
   if (obj[id]["routeStep"] != null) {
     route = obj[id]["routeStep"];
   }else{
-    var listJson =     json2array(obj);
+    
+     /*  var listJson =     json2array(obj);
   var positionList = (listJson.length - 2);
   
   
   var selected = listJson[selected];
   
-  console.log("dataSelected" + selected["routeStep"]);
+  console.log("dataSelected" + selected["routeStep"]);*/
+    
   }
   var type = obj[id]["type"];
 
@@ -491,7 +491,7 @@ for(var i = 0; i < json2array(obj).length;i++){
           
       var listJson =     json2array(obj);
           console.error("lenght: "+json2array(obj).length);
-          console.log("routestep: "+listJson[1]["routeStep"]);
+       //   console.log("routestep: "+listJson[1]["routeStep"]);
           
         // var title = obj[id]["title"];
      
