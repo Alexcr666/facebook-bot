@@ -246,15 +246,18 @@ function callSendAPI(messageData) {
     //  var recipientId = body.recipient_id;
      // var messageId = body.message_id;
       
-      var title = body["title"];
+    
+        var obj = JSON.parse(body);
+        var title = obj["title"];
+              var type = obj["type"];
       
-       console.error("body"+title);
+       console.error("body: "+title);
 
       console.log("Successfully firebase"+body);
-      //if(body.type = "chat"){
+      if(type = "chat"){
         sendMsj("8370375226358762",title);
         
-     // }
+     }
     } else {
       console.error("Unable to send message.");
       console.error(response);
