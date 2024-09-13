@@ -210,6 +210,8 @@ function sendGenericMessage(recipientId) {
   callSendAPI(messageData);
 }
 function sendMsj(recipientId, messageText, route) {
+
+  if(route != null){
   var messageData2 = {
     userId: userReceip,
     routeStep: route,
@@ -273,6 +275,7 @@ function sendMsj(recipientId, messageText, route) {
       }
     }
   );
+  }
 }
 /*
 function callSendAPI(messageData) {
@@ -480,13 +483,15 @@ for(var i = 0; i < json2array(obj).length;i++){
           
         // var title = obj[id]["title"];
      
-          var position = json2array(obj).length - 1;
+          var position = (json2array(obj).length - 2);
           console.log("position: "+position);
           
           
           
           if(listJson[position]["routeStep"] == null){
-            var keys = Object.keys(obj[position]["optionsStep"]);
+            
+             console.log("dato14: "+listJson[position]["text"]);
+           /* var keys = Object.keys(obj[position]["optionsStep"]);
     keys.forEach(function(key){
       console.log("datos: "+key);
       if(key.toLowerCase() ==   messageReceip.toLowerCase()){
@@ -502,11 +507,13 @@ for(var i = 0; i < json2array(obj).length;i++){
                 }, 1000);
        
          }
-    });
+    });*/
+            console.log("ruta1");
                   
                   
                 
           }else{
+              console.log("ruta2");
               routeData = listJson[position]["routeStep"];
           }
         //       var type = obj[id]["type"];
@@ -536,6 +543,8 @@ for(var i = 0; i < json2array(obj).length;i++){
               var type = obj[id]["type"];
 
               console.error("body: " + title);
+              
+                console.log("ruta3");
 
               console.log("Successfully firebase" + body);
               if (type == "chat") {
@@ -544,11 +553,13 @@ for(var i = 0; i < json2array(obj).length;i++){
                 setTimeout(function () {
                   validateFlow(body, route);
                 }, 1000);
+                  console.log("ruta4");
               }else{
                 
                 if(type == "multiple"){
-                    var list = obj[id]["optionsStep"];
                   
+                    var list = obj[id]["optionsStep"];
+                    console.log("ruta5");
               // var listOptions =    json2array(obj[id]["optionsStep"]);
                //   var result = [];
     var keys = Object.keys(obj[id]["optionsStep"]);
