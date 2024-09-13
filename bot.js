@@ -212,6 +212,11 @@ function sendGenericMessage(recipientId) {
 function sendMsj(recipientId, messageText, route) {
 
   //if(route != null){
+
+  
+  if(route != null){
+    
+      console.log("routestep: "+route);
   var messageData2 = {
     userId: userReceip,
     routeStep: route,
@@ -242,6 +247,7 @@ function sendMsj(recipientId, messageText, route) {
       }
     }
   );
+  }
 
   var messageData = {
     recipient: {
@@ -482,20 +488,14 @@ for(var i = 0; i < json2array(obj).length;i++){
           
         }else{
 
-        console.log("Successfully firebase3" + body);
-      //  idData = "-O6gAs7nZlg68hikKCiP";
         var obj = JSON.parse(body);
-          //var lenght = obj.lenght;
-          
-     
-          
+      
       var listJson =     json2array(obj);
           console.error("lenght: "+json2array(obj).length);
-       //   console.log("routestep: "+listJson[1]["routeStep"]);
+    
           
-        // var title = obj[id]["title"];
-     
-          var position = (json2array(obj).length - 2);
+          
+          var position = (json2array(obj).length );
           console.log("position: "+position);
           
           
