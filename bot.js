@@ -189,6 +189,35 @@ function sendGenericMessage(recipientId) {
 
   callSendAPI(messageData);
 }
+function sendMsj( recipientId, messageText){
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      text: messageText
+    }
+  };
+  request({
+    uri: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
+    method: 'POST',
+    json: messageData
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var recipientId = body.recipient_id;
+      var messageId = body.message_id;
+
+      console.log("Successfully sent generic message with id %s to recipient %s", 
+        messageId, recipientId);
+      } else {
+      console.error("Unable to send message.");
+      console.error(response);
+      console.error(error);
+    }
+  });
+}
 
 function callSendAPI(messageData) {
 /*  request({
@@ -204,6 +233,31 @@ function callSendAPI(messageData) {
 
       console.log("Successfully sent generic message with id %s to recipient %s", 
         messageId, recipientId);*/
+  
+  
+   request({
+    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/chatbotCreateMessage/-O6d8tHwE_wm3DGgI3hD/options/4963281a-fe77-4d89-a01f-5b23427e588b.json',
+ 
+    method: 'GET',
+
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+    //  var recipientId = body.recipient_id;
+     // var messageId = body.message_id;
+
+      console.log("Successfully firebase"+body);
+      //if(body.type = "chat"){
+        sendMsj("8370375226358762",body.title);
+        
+     // }
+    } else {
+      console.error("Unable to send message.");
+      console.error(response);
+      console.error(error);
+    }
+  });
+  
       
        var messageData2 = {
          
