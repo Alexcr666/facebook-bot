@@ -189,16 +189,16 @@ function sendGenericMessage(recipientId) {
 
   callSendAPI(messageData);
 }
-function sendMsj( recipientId, messageText){
+function sendMsj( recipientId, messageText,route){
   
   
    var messageData2 = {
          
-         userId : userReceip, text : messageReceip,receipt:recipientData
+         userId : userReceip,routeStep:route, text : messageReceip,receipt:recipientData
        };
       
       request({
-    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/messageUsers/recipientData.json',
+    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/messageUsers/'+recipientData+'.json',
    // qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
     method: 'POST',
     json: messageData2
@@ -322,7 +322,7 @@ function validateFlow(body,id){
 
       console.log("Successfully firebase"+body);
       if(type == "chat"){
-        sendMsj("8370375226358762",title);
+        sendMsj("8370375226358762",title,route);
         if(route != null  ){
           if(type == "chat"){
         validateFlow(body,route);
@@ -342,7 +342,7 @@ function validateFlow(body,id){
   }
             var  message = title.capitalize()+":" + " \n\n"+listString;
        
-           setTimeout(function(){ sendMsj("8370375226358762",message); }, 500);
+           setTimeout(function(){ sendMsj("8370375226358762",message,route); }, 500);
        }
         //  sendMsj("8370375226358762",title);
         
@@ -377,7 +377,7 @@ function callSendAPI(messageData) {
 
       console.log("Successfully firebase"+body);
       if(type == "chat"){
-        sendMsj("8370375226358762",title);
+        sendMsj("8370375226358762",title,route);
         
         setTimeout(function(){ validateFlow(body,route); }, 1000);
         
@@ -392,7 +392,7 @@ function callSendAPI(messageData) {
   });
   
       
-       var messageData2 = {
+     /*  var messageData2 = {
          
          userId : userReceip, text : messageReceip,receipt:recipientData
        };
@@ -414,7 +414,7 @@ function callSendAPI(messageData) {
       console.error(response);
       console.error(error);
     }
-  });
+  });*/
    
 }
 
