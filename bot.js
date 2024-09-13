@@ -70,6 +70,7 @@ app.post('/webhook', function (req, res) {
   }
 });
 var  messageReceip;
+var userReceip;
 
 // Incoming events handling
 function receivedMessage(event) {
@@ -77,6 +78,9 @@ function receivedMessage(event) {
   var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
+  
+  userReceip = senderID;
+  
 
   console.log("Received message for user %d and page %d at %d with message:", 
     senderID, recipientID, timeOfMessage);
@@ -201,11 +205,11 @@ function callSendAPI(messageData) {
       
        var messageData2 = {
          
-         user_id2 : "jack", text : messageReceip
+         userId : userReceip, text : messageReceip
        };
       
       request({
-    uri: 'https://getdev-b2c0b.firebaseio.com/messagefacebook.json',
+    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/messageUsers.json',
    // qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
     method: 'POST',
     json: messageData2
