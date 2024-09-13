@@ -490,8 +490,19 @@ function callSendAPI(messageData) {
                 if(type == "multiple"){
                     var list = obj[id]["optionsStep"];
                   
-               var listOptions =    json2array(obj[id]["optionsStep"]);
-                  kkk
+              // var listOptions =    json2array(obj[id]["optionsStep"]);
+               //   var result = [];
+    var keys = Object.keys(obj[id]["optionsStep"]);
+    keys.forEach(function(key){
+      console.log("datos: "+key);
+      if(key ==   messageReceip){
+        
+        var value = obj[id]["optionsStep"]["key"];
+        
+        
+       
+         }
+    });
                   
                   
                 }
