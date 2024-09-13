@@ -480,8 +480,11 @@ for(var i = 0; i < json2array(obj).length;i++){
           
         // var title = obj[id]["title"];
      
-          var position = json2array(obj).length - 2;
+          var position = json2array(obj).length - 1;
           console.log("position: "+position);
+          
+          
+          
           if(listJson[position]["routeStep"] == null){
             var keys = Object.keys(obj[position]["optionsStep"]);
     keys.forEach(function(key){
