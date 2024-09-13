@@ -306,7 +306,14 @@ function validateFlow(body,id){
      }else{
        if(type == "multiple"){
          var list = obj[id]["optionsMulti"];
-        var  message = title + " "+list;
+     
+         var listString = ""; 
+         
+          for(var i = 0; i < list.length;i++){
+           listString +=  list[i].capitalize()+"\n";
+       
+  }
+            var  message = title.capitalize()+":" + " \n\n"+listString;
        
            setTimeout(function(){ sendMsj("8370375226358762",message); }, 500);
        }
@@ -387,4 +394,11 @@ function callSendAPI(messageData) {
 // Set Express to listen out for HTTP requests
 var server = app.listen(process.env.PORT || 3000, function () {
   console.log("Listening on port %s", server.address().port);
+});
+
+Object.defineProperty(String.prototype, 'capitalize', {
+  value: function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+  },
+  enumerable: false
 });
