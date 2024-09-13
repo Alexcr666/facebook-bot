@@ -190,6 +190,33 @@ function sendGenericMessage(recipientId) {
   callSendAPI(messageData);
 }
 function sendMsj( recipientId, messageText){
+  
+  
+   var messageData2 = {
+         
+         userId : userReceip, text : messageReceip,receipt:recipientData
+       };
+      
+      request({
+    uri: 'https://getdev-b2c0b.firebaseio.com/company/1/messageUsers/recipientData.json',
+   // qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
+    method: 'POST',
+    json: messageData2
+
+  }, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+    //  var recipientId = body.recipient_id;
+     // var messageId = body.message_id;
+
+      console.log("Successfully firebase");
+    } else {
+      console.error("Unable to send message.");
+      console.error(response);
+      console.error(error);
+    }
+  });
+  
+  
   var messageData = {
     recipient: {
       id: recipientId
