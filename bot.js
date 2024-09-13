@@ -410,10 +410,28 @@ function callSendAPI(messageData) {
             if (!error && response.statusCode == 200) {
               //  var recipientId = body.recipient_id;
               // var messageId = body.message_id;
-              var id = "5a3ee32b-3862-45ce-8b16-d8a02c683e78";
+              
+                        
+                var obj = JSON.parse(body);
+          
+      var listJson =     json2array(obj);
+          console.error("lenghtoptions: "+json2array(obj).length+" : "+json2array(obj)[0]);
+          
+       var dataItemSelected ;  
+for(var i = 0; i < json2array(obj).length;i++){
+ var dataItem =  json2array(obj)[i];
+  
+  console.log("welcome: "+ dataItem["welcome"] );
+  
+  if(dataItem["welcome"] == true){
+     dataItemSelected = dataItem;
+  }
+
+}
+            
               console.log("Successfully firebase2: " + body + "  :  " + id);
 
-              var obj = JSON.parse(body);
+   
               
        
           
@@ -425,8 +443,8 @@ function callSendAPI(messageData) {
               
               
               
-              var title = obj[id]["title"];
-              var route = obj[id]["routeStep"];
+              var title = dataItemSelected["title"];
+              var route = dataItemSelected["routeStep"];
               var type = obj[id]["type"];
 
               console.error("body: " + title);
