@@ -460,10 +460,35 @@ function callSendAPI(messageData) {
           console.error("lenght: "+json2array(obj).length);
           
         // var title = obj[id]["title"];
-        var routeData = listJson[(json2array(obj).length-1)]["routeStep"];
+     
+          
+          if(listJson[(json2array(obj).length-1)]["routeStep"] == null){
+            var keys = Object.keys(obj[(json2array(obj).length-1)]["optionsStep"]);
+    keys.forEach(function(key){
+      console.log("datos: "+key);
+      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
+        
+        var value = obj[(json2array(obj).length-1)]["optionsStep"][key];
+ 
+          console.log("dato1: "+value);
+        
+        //sendMsj("8370375226358762", title, value);
+
+                setTimeout(function () {
+                  validateFlow(body, value);
+                }, 1000);
+       
+         }
+    });
+                  
+                  
+                
+          }else{
+              routeData = listJson[(json2array(obj).length-1)]["routeStep"];
+          }
         //       var type = obj[id]["type"];
 
-        //  console.error("body: "+title);
+         console.error("bodyroute: "+routeData);
 
         console.log("Successfully firebase1: " + body);
 
