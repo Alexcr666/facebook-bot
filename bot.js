@@ -377,7 +377,14 @@ function validateFlow(body, id) {
 
 var idData;
 var routeData;
-
+     function json2array(json){
+    var result = [];
+    var keys = Object.keys(json);
+    keys.forEach(function(key){
+        result.push(json[key]);
+    });
+    return result;
+}
 function callSendAPI(messageData) {
   request(
     {
@@ -432,13 +439,17 @@ function callSendAPI(messageData) {
         }else{
 
         console.log("Successfully firebase3" + body);
-        idData = "-O6gAs7nZlg68hikKCiP";
+      //  idData = "-O6gAs7nZlg68hikKCiP";
         var obj = JSON.parse(body);
-          var lenght = obj.lenght;
-          console.error("lenght: "+length);
+          //var lenght = obj.lenght;
+          
+     
+          
+      var listJson =     json2array(obj);
+          console.error("lenght: "+json2array(obj).length);
           
         // var title = obj[id]["title"];
-        var routeData = obj[idData]["routeStep"];
+        var routeData = listJson[1]["routeStep"];
         //       var type = obj[id]["type"];
 
         //  console.error("body: "+title);
@@ -474,6 +485,17 @@ function callSendAPI(messageData) {
                 setTimeout(function () {
                   validateFlow(body, route);
                 }, 1000);
+              }else{
+                
+                if(type == "multiple"){
+                    var list = obj[id]["optionsStep"];
+                  
+               var listOptions =    json2array(obj[id]["optionsStep"]);
+                  kkk
+                  
+                  
+                }
+                
               }
             } else {
               console.error("Unable to send message.");
