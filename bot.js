@@ -214,7 +214,7 @@ function sendMsj(recipientId, messageText, route) {
   //if(route != null){
 
   console.log("routeSend: "+route);
-  if(route != null){
+  //if(route != null){
     
       console.log("routestep: "+route);
   var messageData2 = {
@@ -284,7 +284,7 @@ function sendMsj(recipientId, messageText, route) {
 
   
  // }
-}
+//}
 /*
 function callSendAPI(messageData) {
 
@@ -474,11 +474,14 @@ for(var i = 0; i < json2array(obj).length;i++){
 
               console.log("Successfully firebase" + body);
               if (type == "chat") {
-                //sendMsj("8370375226358762", title, route);
+                sendMsj("8370375226358762", title, route);
 
                 setTimeout(function () {
                   validateFlow(body, route);
                 }, 1000);
+              }else{
+                  sendMsj("8370375226358762", title, route);
+                
               }
             } else {
               console.error("Unable to send message.");
