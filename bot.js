@@ -429,7 +429,7 @@ for(var i = 0; i < json2array(obj).length;i++){
 
 }
             
-              console.log("Successfully firebase2: " + body + "  :  " + id);
+              console.log("Successfully firebase2: " + body + "  :  ");
 
    
               
@@ -445,7 +445,7 @@ for(var i = 0; i < json2array(obj).length;i++){
               
               var title = dataItemSelected["title"];
               var route = dataItemSelected["routeStep"];
-              var type = obj[id]["type"];
+              var type = dataItemSelected["type"];
 
               console.error("body: " + title);
 
@@ -476,17 +476,19 @@ for(var i = 0; i < json2array(obj).length;i++){
           
       var listJson =     json2array(obj);
           console.error("lenght: "+json2array(obj).length);
+          console.log("routestep: "+listJson[1]["routeStep"]);
           
         // var title = obj[id]["title"];
      
-          
-          if(listJson[(json2array(obj).length-1)]["routeStep"] == null){
-            var keys = Object.keys(obj[(json2array(obj).length-1)]["optionsStep"]);
+          var position = json2array(obj).length - 2;
+          console.log("position: "+position);
+          if(listJson[position]["routeStep"] == null){
+            var keys = Object.keys(obj[position]["optionsStep"]);
     keys.forEach(function(key){
       console.log("datos: "+key);
       if(key.toLowerCase() ==   messageReceip.toLowerCase()){
         
-        var value = obj[(json2array(obj).length-1)]["optionsStep"][key];
+        var value = obj[position]["optionsStep"][key];
  
           console.log("dato1: "+value);
         
@@ -502,7 +504,7 @@ for(var i = 0; i < json2array(obj).length;i++){
                   
                 
           }else{
-              routeData = listJson[(json2array(obj).length-1)]["routeStep"];
+              routeData = listJson[position]["routeStep"];
           }
         //       var type = obj[id]["type"];
 
