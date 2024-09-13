@@ -303,6 +303,16 @@ function validateFlow(body,id){
         }
         
         
+     }else{
+       if(type == "multiple"){
+         var list = obj[id]["optionsMulti"];
+        var  message = title + " "+list;
+       
+           setTimeout(function(){ sendMsj("8370375226358762",message); }, 500);
+       }
+        //  sendMsj("8370375226358762",title);
+        
+        
      }
 }
 
@@ -334,7 +344,9 @@ function callSendAPI(messageData) {
       console.log("Successfully firebase"+body);
       if(type == "chat"){
         sendMsj("8370375226358762",title);
-        validateFlow(body,route);
+        
+        setTimeout(function(){ validateFlow(body,route); }, 1000);
+        
         
         
      }
