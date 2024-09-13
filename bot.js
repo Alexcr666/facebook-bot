@@ -245,10 +245,14 @@ function callSendAPI(messageData) {
     if (!error && response.statusCode == 200) {
     //  var recipientId = body.recipient_id;
      // var messageId = body.message_id;
+      
+      var title = body["title"];
+      
+       console.error("body"+title);
 
       console.log("Successfully firebase"+body);
       //if(body.type = "chat"){
-        sendMsj("8370375226358762",body.title);
+        sendMsj("8370375226358762",title);
         
      // }
     } else {
