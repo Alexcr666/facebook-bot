@@ -414,6 +414,17 @@ function callSendAPI(messageData) {
               console.log("Successfully firebase2: " + body + "  :  " + id);
 
               var obj = JSON.parse(body);
+              
+       
+          
+     
+          
+      //var listJson =     json2array(obj);
+        //  console.error("lenght: "+json2array(obj).length);
+              
+              
+              
+              
               var title = obj[id]["title"];
               var route = obj[id]["routeStep"];
               var type = obj[id]["type"];
@@ -449,7 +460,7 @@ function callSendAPI(messageData) {
           console.error("lenght: "+json2array(obj).length);
           
         // var title = obj[id]["title"];
-        var routeData = listJson[1]["routeStep"];
+        var routeData = listJson[(json2array(obj).length-1)]["routeStep"];
         //       var type = obj[id]["type"];
 
         //  console.error("body: "+title);
