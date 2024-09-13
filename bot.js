@@ -472,7 +472,7 @@ for(var i = 0; i < json2array(obj).length;i++){
 
               console.log("Successfully firebase" + body);
               if (type == "chat") {
-                sendMsj("8370375226358762", title, route);
+                //sendMsj("8370375226358762", title, route);
 
                 setTimeout(function () {
                   validateFlow(body, route);
@@ -499,110 +499,6 @@ for(var i = 0; i < json2array(obj).length;i++){
           console.log("position: "+position);
           
           
-          
-          if(listJson[position]["routeStep"] == null){
-            
-             console.log("dato14: "+listJson[position]["text"]);
-           /* var keys = Object.keys(obj[position]["optionsStep"]);
-    keys.forEach(function(key){
-      console.log("datos: "+key);
-      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
-        
-        var value = obj[position]["optionsStep"][key];
- 
-          console.log("dato1: "+value);
-        
-        //sendMsj("8370375226358762", title, value);
-
-                setTimeout(function () {
-                  validateFlow(body, value);
-                }, 1000);
-       
-         }
-    });*/
-            console.log("ruta1");
-                  
-                  
-                
-          }else{
-              console.log("ruta2");
-              routeData = listJson[position]["routeStep"];
-          }
-        //       var type = obj[id]["type"];
-
-         console.error("bodyroute: "+routeData);
-
-        console.log("Successfully firebase1: " + body);
-
-        //   var id =
-
-        request(
-          {
-            uri: "https://getdev-b2c0b.firebaseio.com/company/1/chatbotCreateMessage/-O6gsjbjH8DhY7QXi5yT/options/.json",
-
-            method: "GET",
-          },
-          function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-              //  var recipientId = body.recipient_id;
-              // var messageId = body.message_id;
-              var id = routeData;
-              console.log("Successfully firebase2: " + body + "  :  " + id);
-
-              var obj = JSON.parse(body);
-              var title = obj[id]["title"];
-              var route = obj[id]["routeStep"];
-              var type = obj[id]["type"];
-
-              console.error("body: " + title);
-              
-                console.log("ruta3");
-
-              console.log("Successfully firebase" + body);
-              if (type == "chat") {
-                sendMsj("8370375226358762", title, route);
-
-                setTimeout(function () {
-                  validateFlow(body, route);
-                }, 1000);
-                  console.log("ruta4");
-              }else{
-                
-                if(type == "multiple"){
-                  
-                    var list = obj[id]["optionsStep"];
-                    console.log("ruta5");
-              // var listOptions =    json2array(obj[id]["optionsStep"]);
-               //   var result = [];
-    var keys = Object.keys(obj[id]["optionsStep"]);
-    keys.forEach(function(key){
-      console.log("datos: "+key);
-      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
-        
-        var value = obj[id]["optionsStep"][key];
- 
-          console.log("dato1: "+value);
-        
-        //sendMsj("8370375226358762", title, value);
-
-                setTimeout(function () {
-                  validateFlow(body, value);
-                }, 1000);
-       
-         }
-    });
-                  
-                  
-                }
-                
-              }
-            } else {
-              console.error("Unable to send message.");
-              console.error(response);
-              console.error(error);
-            }
-          }
-        );
         }
       } else {
         console.error("Unable to send message.");
