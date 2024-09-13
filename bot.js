@@ -341,13 +341,23 @@ function callSendAPI(messageData) {
 }*/
 function validateFlow(body, id) {
   var obj = JSON.parse(body);
+  
+  
+  
+  
   var title = obj[id]["title"];
 
   var route = null;
   if (obj[id]["routeStep"] != null) {
     route = obj[id]["routeStep"];
   }else{
-    
+    var listJson =     json2array(obj);
+  var positionList = (listJson.length - 2);
+  
+  
+  var selected = listJson[selected];
+  
+  console.log("dataSelected" + selected["routeStep"]);
   }
   var type = obj[id]["type"];
 
