@@ -500,8 +500,35 @@ for(var i = 0; i < json2array(obj).length;i++){
     
           
           
-          var position = (json2array(obj).length );
+          var position = (json2array(obj).length  - 2 );
           console.log("position: "+position);
+          
+               if(listJson[position]["routeStep"] != null){
+                 var value =listJson[position]["routeStep"];
+                   /*  console.log("dato14: "+listJson[position]["text"]);
+           var keys = Object.keys(listJson[position]["optionsStep"]);
+    keys.forEach(function(key){
+      console.log("datos: "+key);
+      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
+        
+        var value = obj[position]["optionsStep"][key];
+ 
+          console.log("dato1: "+value);
+        
+        //sendMsj("8370375226358762", title, value);
+
+                setTimeout(function () {
+                  validateFlow(body, value);
+                }, 1000);
+       
+         }});*/
+                 setTimeout(function () {
+                  validateFlow(body, value);
+                }, 1000);
+                 
+               }else{
+                 
+               }
           
           
         }
