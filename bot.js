@@ -527,18 +527,32 @@ for(var i = 0; i < json2array(obj).length;i++){
         
         
               if (type == "multiple") {
-                sendMsj("8370375226358762", title, route);
                 
-                var value =listJson[position]["routeStep"];
-                    console.log("dato14: "+listJson[position]["text"]);
-           var keys = Object.keys(listJson[position]["optionsStep"]);
+                
+      var list = dataItemSelected["optionsMulti"];
+
+      var listString = "";
+
+      for (var i = 0; i < list.length; i++) {
+        listString += list[i].capitalize() + "\n";
+      }
+      var message = title.capitalize() + ":" + " \n\n" + listString;
+
+    //  setTimeout(function () {
+        sendMsj("8370375226358762", message, route);
+     // }, 500);
+    
+                
+            
+/*
+           var keys = Object.keys( dataItemSelected["optionsStep"]);
+                
     keys.forEach(function(key){
       console.log("datos: "+key);
       if(key.toLowerCase() ==   messageReceip.toLowerCase()){
-        
-        var value = obj[position]["optionsStep"][key];
- 
-          console.log("dato1: "+value);
+
+      }});*/
+    
 
              
               }
