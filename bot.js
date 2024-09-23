@@ -486,7 +486,74 @@ for(var i = 0; i < json2array(obj).length;i++){
           
         }else{
           
-           kkk
+          
+        var obj = JSON.parse(body);
+      
+      var listJson =     json2array(obj);
+          console.error("lenght: "+json2array(obj).length);
+    
+          
+          
+          var position = (json2array(obj).length  - 1 );
+          
+            var value =listJson[position]["routeStep"];
+                   // console.log("dato14: "+listJson[position]["text"]);
+          console.log("position22: "+value);
+          
+       request(
+          {
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/"+value+"/.json",
+
+            method: "GET",
+          },
+          function (error, response, body) {
+          
+      if (!error && response.statusCode == 200) {
+           var dataItemSelected = JSON.parse(body);
+        
+           var type = dataItemSelected["type"];
+         var route = dataItemSelected["routeStep"];
+        
+        
+          var title = dataItemSelected["title"];
+        
+             
+      
+              if (type == "chat") {
+                sendMsj("8370375226358762", title, route);
+
+             
+              }
+        
+        
+              if (type == "multiple") {
+                sendMsj("8370375226358762", title, route);
+                
+                var value =listJson[position]["routeStep"];
+                    console.log("dato14: "+listJson[position]["text"]);
+           var keys = Object.keys(listJson[position]["optionsStep"]);
+    keys.forEach(function(key){
+      console.log("datos: "+key);
+      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
+        
+        var value = obj[position]["optionsStep"][key];
+ 
+          console.log("dato1: "+value);
+
+             
+              }
+        
+        
+             
+              if (type == "link") {
+                sendMsj("8370375226358762", title, route);
+
+             
+              }
+        
+        
+      }
+    });
           
           
         
