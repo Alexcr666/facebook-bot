@@ -227,7 +227,7 @@ function sendMsj(recipientId, messageText, route) {
   request(
     {
       uri:
-        "https://getdev-b2c0b.firebaseio.com/company/1/messageUsers/" +
+        "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/" +
         recipientData +
         ".json",
       // qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
@@ -413,7 +413,7 @@ function callSendAPI(messageData) {
      console.log("message" + messageData);
   request(
     {
-      uri: "https://getdev-b2c0b.firebaseio.com/company/1/messageUsers/"+recipientData+"/.json",
+      uri: "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/"+recipientData+"/.json",
 
       method: "GET",
     },
@@ -423,9 +423,73 @@ function callSendAPI(messageData) {
         // var messageId = body.message_id;
            console.log("Successfully firebase4" + body);
         if(body == "null"){
+            console.log("Successfully firebase5" + body);
+          
+        request(
+          {
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/.json",
+
+            method: "GET",
+          },
+          function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+              //  var recipientId = body.recipient_id;
+              // var messageId = body.message_id;
+              
+                        
+                var obj = JSON.parse(body);
+          
+      var listJson =     json2array(obj);
+          console.error("lenghtoptions: "+json2array(obj).length+" : "+json2array(obj)[0]);
+          
+       var dataItemSelected ;  
+for(var i = 0; i < json2array(obj).length;i++){
+ var dataItem =  json2array(obj)[i];
+  
+  console.log("welcome: "+ dataItem["welcome"] );
+  
+  if(dataItem["welcome"] == true){
+     dataItemSelected = dataItem;
+  }
+
+}
             
+              console.log("Successfully firebase2: " + body + "  :  ");
+
+   
+              
+              
+              var title = dataItemSelected["title"];
+              var route = dataItemSelected["routeStep"];
+              var type = dataItemSelected["type"];
+
+              console.error("body: " + title);
+
+              console.log("Successfully firebase" + body);
+              if (type == "chat") {
+                sendMsj("8370375226358762", title, route);
+
+               /* setTimeout(function () {
+                  validateFlow(body, route);
+                }, 1000);*/
+              }else{
+                  sendMsj("8370375226358762", title, route);
+                
+              }
+            } else {
+              console.error("Unable to send message.");
+              console.error(response);
+              console.error(error);
+            }
+          }
+        );
           
         }else{
+          
+           kkk
+          
+          
+        
 
           
           
