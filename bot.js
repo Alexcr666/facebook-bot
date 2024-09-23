@@ -280,6 +280,7 @@ function sendMsj(recipientId, messageText, route) {
       }
     }
   );
+ // }
   }
 
   
@@ -511,14 +512,27 @@ for(var i = 0; i < json2array(obj).length;i++){
       if (!error && response.statusCode == 200) {
            var dataItemSelected = JSON.parse(body);
         
+        
+             
+      if(dataItemSelected["routeStep"].toString() == "null"){
+        
+        
+          var keys = Object.keys( dataItemSelected["optionsStep"]);
+                
+    keys.forEach(function(key){
+      console.log("datos: "+key);
+      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
+
+      }});
+        
+        
+      }else{
+        
            var type = dataItemSelected["type"];
          var route = dataItemSelected["routeStep"];
         
         
           var title = dataItemSelected["title"];
-        
-             
-      
               if (type == "chat") {
                 sendMsj("8370375226358762", title, route);
 
@@ -564,6 +578,7 @@ for(var i = 0; i < json2array(obj).length;i++){
 
              
               }
+      }
         
         
       }
