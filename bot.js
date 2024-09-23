@@ -409,6 +409,8 @@ var routeData;
     return result;
 }
 function callSendAPI(messageData) {
+  
+     console.log("message" + messageData);
   request(
     {
       uri: "https://getdev-b2c0b.firebaseio.com/company/1/messageUsers/"+recipientData+"/.json",
@@ -425,7 +427,7 @@ function callSendAPI(messageData) {
           
         request(
           {
-            uri: "https://getdev-b2c0b.firebaseio.com/company/1/chatbotCreateMessage/-O6gsjbjH8DhY7QXi5yT/options/.json",
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/.json",
 
             method: "GET",
           },
