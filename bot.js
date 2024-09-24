@@ -537,9 +537,14 @@ for(var i = 0; i < json2array(obj).length;i++){
           
             var value =listJson[position]["routeStep"];
           
-   var keys = Object.keys(listJson);
-                   console.log("dato14: "+keys);
-          console.log("position22: "+value+" "+listJson[position].key);
+   var keysId = Object.keys(obj);
+                  keysId.forEach(function(key){
+      console.log("datos34: : "+keysId+"  :  "+keysId[position]);
+      
+      });
+          
+          
+         // console.log("position22: "+value+" "+listJson[position].key);
           
           if(value == undefined){
             
@@ -563,6 +568,25 @@ for(var i = 0; i < json2array(obj).length;i++){
       if(key.toLowerCase() ==   messageReceip.toLowerCase()){
         
         var value = dataItemSelected["optionsStep"][key];
+        
+         var messageData2 = {
+    routeStep: value,
+
+  };
+          
+           request(
+          {
+              uri: "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/"+recipientData+"/"+keysId[position]+"/.json",
+
+            method: "PATCH",
+            json:messageData2
+          },
+          function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+         
+              
+              
+            }});
  
           console.log("dato1: "+value);
           validationMsj(value);
