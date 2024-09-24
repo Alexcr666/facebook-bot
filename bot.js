@@ -239,9 +239,9 @@ function sendMsj(recipientId, messageText, route) {
         
         //  var recipientId = body.recipient_id;
         // var messageId = body.message_id;
-        kkk
+           //  var obj = JSON.parse(body);
 
-        console.log("Successfully firebase"+response);
+        console.log("Successfully firebase id ");
         
         var messageData = {
     recipient: {
@@ -536,6 +536,8 @@ for(var i = 0; i < json2array(obj).length;i++){
           var position = (json2array(obj).length  - 1 );
           
             var value =listJson[position]["routeStep"];
+          
+   var keys = Object.keys(dataItemSelected["optionsStep"]);
                    // console.log("dato14: "+listJson[position]["text"]);
           console.log("position22: "+value+" "+listJson[position].key);
           
