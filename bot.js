@@ -537,8 +537,8 @@ for(var i = 0; i < json2array(obj).length;i++){
           
             var value =listJson[position]["routeStep"];
           
-   var keys = Object.keys(dataItemSelected["optionsStep"]);
-                   // console.log("dato14: "+listJson[position]["text"]);
+   var keys = Object.keys(listJson);
+                   console.log("dato14: "+keys);
           console.log("position22: "+value+" "+listJson[position].key);
           
           if(value == undefined){
