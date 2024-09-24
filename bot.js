@@ -323,8 +323,10 @@ function sendMsj(recipientId, messageText, route) {
     },
     function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        
-        validationMsjRepeat(route);
+       setTimeout(function () {
+                 validationMsjRepeat(route);
+                }, 700);
+      
         
         //  var recipientId = body.recipient_id;
         // var messageId = body.message_id;
