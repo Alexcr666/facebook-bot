@@ -348,56 +348,6 @@ function callSendAPI(messageData) {
   });
    
 }*/
-function validateFlow(body, id) {
-  var obj = JSON.parse(body);
-  var title = obj[id]["title"];
-
-  var route = null;
-  
-  console.log("routeStep: "+obj[id]["routeStep"]);
-  if (obj[id]["routeStep"] != null) {
-    route = obj[id]["routeStep"];
-  }else{
-    
-     /*  var listJson =     json2array(obj);
-  var positionList = (listJson.length - 2);
-  
-  
-  var selected = listJson[selected];
-  
-  console.log("dataSelected" + selected["routeStep"]);*/
-    
-  }
-  var type = obj[id]["type"];
-
-  console.error("body: " + title);
-
-  console.log("Successfully firebase" + body);
-  if (type == "chat") {
-    sendMsj("8370375226358762", title, route);
-    if (route != null) {
-      if (type == "chat") {
-        validateFlow(body, route);
-      }
-    }
-  } else {
-    if (type == "multiple") {
-      var list = obj[id]["optionsMulti"];
-
-      var listString = "";
-
-      for (var i = 0; i < list.length; i++) {
-        listString += list[i].capitalize() + "\n";
-      }
-      var message = title.capitalize() + ":" + " \n\n" + listString;
-
-    //  setTimeout(function () {
-        sendMsj("8370375226358762", message, route);
-     // }, 500);
-    }
-    //  sendMsj("8370375226358762",title);
-  }
-}
 
 var idData;
 var routeData;
