@@ -409,6 +409,92 @@ var routeData;
     });
     return result;
 }
+
+function validationMsj( value){
+  request(
+          {
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/"+value+"/.json",
+
+            method: "GET",
+          },
+          function (error, response, body) {
+          
+      if (!error && response.statusCode == 200) {
+           var dataItemSelected = JSON.parse(body);
+        
+        
+             
+/*      if(dataItemSelected.isNull("routeStep")){
+        
+        
+          var keys = Object.keys( dataItemSelected["optionsStep"]);
+                
+    keys.forEach(function(key){
+      console.log("datos: "+key);
+      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
+
+      }});
+        
+        
+      }else{*/
+        
+           var type = dataItemSelected["type"];
+         var route = dataItemSelected["routeStep"];
+        
+        
+          var title = dataItemSelected["title"];
+              if (type == "chat") {
+                sendMsj("8370375226358762", title, route);
+
+             
+              }
+        
+        
+              if (type == "multiple") {
+                
+                
+      var list = dataItemSelected["optionsMulti"];
+
+      var listString = "";
+
+      for (var i = 0; i < list.length; i++) {
+        listString += list[i].capitalize() + "\n";
+      }
+      var message = title.capitalize() + ":" + " \n\n" + listString;
+
+    //  setTimeout(function () {
+        sendMsj("8370375226358762", message, route);
+     // }, 500);
+    
+                
+            
+/*
+           var keys = Object.keys( dataItemSelected["optionsStep"]);
+                
+    keys.forEach(function(key){
+      console.log("datos: "+key);
+      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
+
+      }});*/
+    
+
+             
+              }
+        
+        
+             
+              if (type == "link") {
+                sendMsj("8370375226358762", title, route);
+
+             
+              }
+     // }
+        
+        
+      }
+    });
+}
+
 function callSendAPI(messageData) {
   
      console.log("message" + messageData);
@@ -501,9 +587,13 @@ for(var i = 0; i < json2array(obj).length;i++){
                    // console.log("dato14: "+listJson[position]["text"]);
           console.log("position22: "+value);
           
-       request(
+          if(value == undefined){
+          //  value = listJson[position-1]["routeStep"];
+                      
+            var valueMultiple =listJson[position-1]["routeStep"];
+          request(
           {
-            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/"+value+"/.json",
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/"+valueMultiple+"/.json",
 
             method: "GET",
           },
@@ -512,77 +602,29 @@ for(var i = 0; i < json2array(obj).length;i++){
       if (!error && response.statusCode == 200) {
            var dataItemSelected = JSON.parse(body);
         
-        
-             
-      if(dataItemSelected.isNull("routeStep")){
-        
-        
-          var keys = Object.keys( dataItemSelected["optionsStep"]);
-                
+        var keys = Object.keys(dataItemSelected["optionsStep"]);
     keys.forEach(function(key){
       console.log("datos: "+key);
       if(key.toLowerCase() ==   messageReceip.toLowerCase()){
-
+        
+        var value = dataItemSelected["optionsStep"][key];
+ 
+          console.log("dato1: "+value);
+          validationMsj(value);
       }});
-        
-        
-      }else{
-        
-           var type = dataItemSelected["type"];
-         var route = dataItemSelected["routeStep"];
-        
-        
-          var title = dataItemSelected["title"];
-              if (type == "chat") {
-                sendMsj("8370375226358762", title, route);
-
-             
-              }
-        
-        
-              if (type == "multiple") {
-                
-                
-      var list = dataItemSelected["optionsMulti"];
-
-      var listString = "";
-
-      for (var i = 0; i < list.length; i++) {
-        listString += list[i].capitalize() + "\n";
-      }
-      var message = title.capitalize() + ":" + " \n\n" + listString;
-
-    //  setTimeout(function () {
-        sendMsj("8370375226358762", message, route);
-     // }, 500);
-    
-                
+      
+      
+      }});
+                    
+           
             
-/*
-           var keys = Object.keys( dataItemSelected["optionsStep"]);
-                
-    keys.forEach(function(key){
-      console.log("datos: "+key);
-      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
-
-      }});*/
+            
+            
+          }else{
+            validationMsj(value);
+          }
+          
     
-
-             
-              }
-        
-        
-             
-              if (type == "link") {
-                sendMsj("8370375226358762", title, route);
-
-             
-              }
-      }
-        
-        
-      }
-    });
           
           
         
