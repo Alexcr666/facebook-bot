@@ -209,6 +209,93 @@ function sendGenericMessage(recipientId) {
 
   callSendAPI(messageData);
 }
+
+
+
+function validationMsjRepeat( value){
+  request(
+          {
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/"+value+"/.json",
+
+            method: "GET",
+          },
+          function (error, response, body) {
+          
+      if (!error && response.statusCode == 200) {
+           var dataItemSelected = JSON.parse(body);
+        
+        
+             
+/*      if(dataItemSelected.isNull("routeStep")){
+        
+        
+          var keys = Object.keys( dataItemSelected["optionsStep"]);
+                
+    keys.forEach(function(key){
+      console.log("datos: "+key);
+      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
+
+      }});
+        
+        
+      }else{*/
+        
+           var type = dataItemSelected["type"];
+         var route = dataItemSelected["routeStep"];
+        
+        
+          var title = dataItemSelected["title"];
+              if (type == "chat") {
+                sendMsj("8370375226358762", title, route);
+
+             
+              }
+        
+        
+              if (type == "multiple") {
+                
+                
+      var list = dataItemSelected["optionsMulti"];
+
+      var listString = "";
+
+      for (var i = 0; i < list.length; i++) {
+        listString += list[i].capitalize() + "\n";
+      }
+      var message = title.capitalize() + ":" + " \n\n" + listString;
+
+    //  setTimeout(function () {
+        sendMsj("8370375226358762", message, route);
+     // }, 500);
+    
+                
+            
+/*
+           var keys = Object.keys( dataItemSelected["optionsStep"]);
+                
+    keys.forEach(function(key){
+      console.log("datos: "+key);
+      if(key.toLowerCase() ==   messageReceip.toLowerCase()){
+
+      }});*/
+    
+
+             
+              }
+        
+        
+             
+              if (type == "link") {
+                sendMsj("8370375226358762", title, route);
+
+             
+              }
+     // }
+        
+        
+      }
+    });
+}
 function sendMsj(recipientId, messageText, route) {
 
   //if(route != null){
@@ -236,6 +323,8 @@ function sendMsj(recipientId, messageText, route) {
     },
     function (error, response, body) {
       if (!error && response.statusCode == 200) {
+        
+        validationMsjRepeat(route);
         
         //  var recipientId = body.recipient_id;
         // var messageId = body.message_id;
