@@ -236,10 +236,12 @@ function sendMsj(recipientId, messageText, route) {
     },
     function (error, response, body) {
       if (!error && response.statusCode == 200) {
+        
         //  var recipientId = body.recipient_id;
         // var messageId = body.message_id;
+        kkk
 
-        console.log("Successfully firebase");
+        console.log("Successfully firebase"+response);
         
         var messageData = {
     recipient: {
@@ -535,9 +537,10 @@ for(var i = 0; i < json2array(obj).length;i++){
           
             var value =listJson[position]["routeStep"];
                    // console.log("dato14: "+listJson[position]["text"]);
-          console.log("position22: "+value);
+          console.log("position22: "+value+" "+listJson[position].key);
           
           if(value == undefined){
+            
           //  value = listJson[position-1]["routeStep"];
                       
             var valueMultiple =listJson[position-1]["routeStep"];
