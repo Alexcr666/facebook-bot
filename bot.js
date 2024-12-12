@@ -12,6 +12,8 @@ var messengerButton =
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
+const idChat = "-ODvWrCbH47cu21VClQr";
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -215,7 +217,7 @@ function sendGenericMessage(recipientId) {
 function validationMsjRepeat( value){
   request(
           {
-            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/"+value+"/.json",
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/"+idChat+"/options/"+value+"/.json",
 
             method: "GET",
           },
@@ -456,7 +458,7 @@ var routeData;
 function validationMsj( value){
   request(
           {
-            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/"+value+"/.json",
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/"+idChat+"/options/"+value+"/.json",
 
             method: "GET",
           },
@@ -557,7 +559,7 @@ function callSendAPI(messageData) {
           
         request(
           {
-            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/.json",
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/"+idChat+"/options/.json",
 
             method: "GET",
           },
@@ -644,7 +646,7 @@ for(var i = 0; i < json2array(obj).length;i++){
             var valueMultiple =listJson[position-1]["routeStep"];
           request(
           {
-            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/-O6wyCBFL4EqBTBDOuKw/options/"+valueMultiple+"/.json",
+            uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/"+idChat+"/options/"+valueMultiple+"/.json",
 
             method: "GET",
           },
