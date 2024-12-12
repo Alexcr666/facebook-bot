@@ -445,12 +445,12 @@ function callSendAPI(messageData) {
 var idData;
 var routeData;
      function json2array(json){
-   /* var result = [];
+    var result = [];
     var keys = Object.keys(json);
     keys.forEach(function(key){
         result.push(json[key]);
     });
-    return result;*/
+    return result;
 }
 
 function validationMsj( value){
@@ -539,9 +539,6 @@ function validationMsj( value){
 }
 
 function callSendAPI(messageData) {
-  
-}
-function callSendAPI22(messageData) {
   
      console.log("message" + messageData);
   request(
