@@ -211,7 +211,7 @@ function sendGenericMessage(recipientId) {
     },
   };
 
- // callSendAPI(messageData);
+ callSendAPI(messageData);
 }
 
 
@@ -243,7 +243,7 @@ function validationMsjRepeat( value){
         
         
       }else{*/
-        
+        if(dataItemSelected != null){
            var type = dataItemSelected["type"];
          var route = dataItemSelected["routeStep"];
         
@@ -297,6 +297,9 @@ function validationMsjRepeat( value){
      // }
         
         
+      }
+      }else{
+       console.log("errordatos: ");  
       }
     });
 }
