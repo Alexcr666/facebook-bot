@@ -660,6 +660,8 @@ for(var i = 0; i < json2array(obj).length;i++){
       if (!error && response.statusCode == 200) {
            var dataItemSelected = JSON.parse(body);
         
+        if(dataItemSelected["optionsStep"] != null){
+        
         var keys = Object.keys(dataItemSelected["optionsStep"]);
     keys.forEach(function(key){
       console.log("datos: "+key);
@@ -689,6 +691,7 @@ for(var i = 0; i < json2array(obj).length;i++){
           console.log("dato1: "+value);
           validationMsj(value);
       }});
+        }
       
       
       }});
