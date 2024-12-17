@@ -101,6 +101,8 @@ function receivedMessage(event) {
   var messageText = message.text;
   messageReceip = message.text;
   var messageAttachments = message.attachments;
+  
+    console.log("message45: "+messageText);
 
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
@@ -209,7 +211,7 @@ function sendGenericMessage(recipientId) {
     },
   };
 
-  callSendAPI(messageData);
+ // callSendAPI(messageData);
 }
 
 
