@@ -571,6 +571,51 @@ function validationMsj( value){
     });
 }
 
+function  createInfoChat(){
+  var messageData2 = {
+    apertura: 0,
+    typeOpen: "facebook",
+    contactAdd: "nuevo",
+    date: "2025-01-01 08:15",
+    departamentTitle: "Nuevo23",
+    getHelp: 1,
+    idAgent: "d1",
+
+    idChat: "/company/sly/chatbotCreateMessage/" + idChat,
+
+    idEtiqueta: "d1",
+    idMessage: "/company/sly/messageUsers/" + recipientId,
+    idTrigger: "d1",
+    ip: "1.0.1",
+    levelService: 5,
+    location: "http://localhost:55927/#/chatbot",
+    mediaPlayer: 7,
+    mediaResp: 4,
+    mediaSesion: 5,
+    messageUser: recipientId,
+    name: "Segurex",
+    open: "visitante",
+    rating: 4,
+    titleAgent: "Joser",
+    titleEtiqueta: "Compras",
+    titleTrigger: "Nuevo",
+    totalHour: 4,
+    type: "1",
+  };
+
+  //CREA LA INFORMACIÓN DE LA CONVERZACIÓN
+
+  axios
+    .post(
+      "https://getdev-b2c0b.firebaseio.com/company/sly/infoChat/.json",
+      messageData2
+    )
+    .then((response) => {
+      repeatChat();
+      //INICIA EL CHAT
+    });
+}
+
 function callSendAPI(messageData) {
   
      console.log("message" + messageData);
@@ -587,6 +632,7 @@ function callSendAPI(messageData) {
            console.log("Successfully firebase4" + body);
         if(body == "null"){
             console.log("Successfully firebase5" + body);
+            createInfoChat();
           
         request(
           {
