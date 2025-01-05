@@ -14,6 +14,8 @@ let app = express();
 
 const idChat = "-OFnMLo038wm6BzEDc90";
 
+//nuevo
+
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
