@@ -1,11 +1,14 @@
 //
 // This is main file containing code implementing the Express server and functionality for the Express echo bot.
 //
+
 "use strict";
 const express = require("express");
 const bodyParser = require("body-parser");
 const request = require("request");
 const path = require("path");
+const axios = require("axios");
+
 var messengerButton =
   '<html><head><title>Facebook Messenger Bot</title></head><body><h1>Facebook Messenger Bot</h1>This is a bot based on Messenger Platform QuickStart. For more details, see their <a href="https://developers.facebook.com/docs/messenger-platform/guides/quick-start">docs</a>.<script src="https://button.glitch.me/button.js" data-style="glitch"></script><div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div></body></html>';
 
