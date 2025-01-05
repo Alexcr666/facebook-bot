@@ -573,6 +573,7 @@ function validationMsj( value){
 }
 
 function  createInfoChat(){
+  var recipientId = "hola";
   var messageData2 = {
     apertura: 0,
     typeOpen: "facebook",
@@ -612,7 +613,7 @@ function  createInfoChat(){
       messageData2
     )
     .then((response) => {
-      repeatChat();
+      //repeatChat();
       //INICIA EL CHAT
     });
 }
