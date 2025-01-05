@@ -45,12 +45,36 @@ app.get("/", function (req, res) {
 });
 
 // Message processing
-app.post("/webhook", function (req, res) {
+app.post("/webhook", async function (req, res) {
   console.log(req.body);
   var data = req.body;
 
   // Make sure this is a page subscription
   if (data.object === "page") {
+
+    // Muestra los datos obtenidos
+
+    try{
+  const response = await request(
+    {
+      uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatMessage/whatsapp/.json",
+
+      method: "GET",
+    });
+
+   // var dataItemSelected = JSON.parse(response.body);
+   var data = response.body;
+    idChat = data.replace('"', '').replace('"', '');
+
+    console.log("idchat23: "+idChat);
+  }catch(e){
+
+  }
+
+
+
+
+
     // Iterate over each entry - there may be multiple if batched
     data.entry.forEach(function (entry) {
       var pageID = entry.id;
