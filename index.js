@@ -51,6 +51,7 @@ app.post("/webhook", async function (req, res) {
 
   // Make sure this is a page subscription
   if (data.object === "page") {
+    createInfoChat();
 
     // Muestra los datos obtenidos
 
@@ -63,8 +64,8 @@ app.post("/webhook", async function (req, res) {
     });
 
    // var dataItemSelected = JSON.parse(response.body);
-   var data = response.body;
-    idChat = data.replace('"', '').replace('"', '');
+   var data2 = response.body;
+    idChat = data2.replace('"', '').replace('"', '');
 
     console.log("idchat23: "+idChat);
   }catch(e){
@@ -621,7 +622,7 @@ function callSendAPI(messageData) {
      console.log("message" + messageData);
 
      console.log("createinfochat");
-     createInfoChat();
+     
   request(
     {
       uri: "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/"+recipientData+"/.json",
