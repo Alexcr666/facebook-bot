@@ -619,6 +619,9 @@ function  createInfoChat(){
 function callSendAPI(messageData) {
   
      console.log("message" + messageData);
+
+     console.log("createinfochat");
+     createInfoChat();
   request(
     {
       uri: "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/"+recipientData+"/.json",
@@ -632,7 +635,7 @@ function callSendAPI(messageData) {
            console.log("Successfully firebase4" + body);
         if(body == "null"){
             console.log("Successfully firebase5" + body);
-            createInfoChat();
+            
           
         request(
           {
