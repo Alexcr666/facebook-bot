@@ -2,9 +2,9 @@
   "name": "messenger-bot",
   "version": "1.0.0",
   "description": "Messenger Platform QuickStart Demo",
-  "main": "bot.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
