@@ -15,7 +15,7 @@ var messengerButton =
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
-const idChat = "-OFnMLo038wm6BzEDc90";
+var idChat = "-OFnMLo038wm6BzEDc90";
 var recipientId = "8370375226358762";
 
 
@@ -287,9 +287,9 @@ function sendGenericMessage(recipientId) {
 
 async function sendMedia(title,media,url3) {
   
-  const url = `https://graph.facebook.com/v18.0/me/messages`;
+  var url = `https://graph.facebook.com/v18.0/me/messages`;
 
-  const payload = {
+  var payload = {
     recipient: {
       id: recipientId,
     },
@@ -305,7 +305,7 @@ async function sendMedia(title,media,url3) {
   };
 
   try {
-    const response = await axios.post(url, payload, {
+    var response = await axios.post(url, payload, {
       params: { access_token: PAGE_ACCESS_TOKEN },
       headers: {
         "Content-Type": "application/json",
@@ -323,9 +323,9 @@ async function sendMedia(title,media,url3) {
 
 
 async function sendLink( urlData) {
-  const url = `https://graph.facebook.com/v18.0/me/messages`;
+  var url = `https://graph.facebook.com/v18.0/me/messages`;
 
-  const payload = {
+  var payload = {
     recipient: {
       id: USER_ID,
     },
@@ -348,7 +348,7 @@ async function sendLink( urlData) {
   };
 
   try {
-    const response = await axios.post(url, payload, {
+    var response = await axios.post(url, payload, {
       params: { access_token: PAGE_ACCESS_TOKEN },
       headers: {
         "Content-Type": "application/json",
@@ -377,7 +377,7 @@ function validationMsj(value) {
       )
       .then((response) => {
         if (response.status == 200) {
-          const jsonData = JSON.stringify(response.data, null, 2);
+          var jsonData = JSON.stringify(response.data, null, 2);
 
           var dataItemSelected = JSON.parse(jsonData);
 
@@ -416,7 +416,7 @@ function validationMsj(value) {
                   console.error("SELECCIONADO DE MULTIPLE: " + positionFinal);
                   var routeMultiple = listProm[positionFinal];
                   console.error("RUTA SELECCIONADA MULTIPLE: " + routeMultiple);
-                  const newData = {
+                  var newData = {
                     routeStep: routeMultiple,
               
                   };
@@ -1000,7 +1000,7 @@ function repeatChat() {
         "/options/.json"
     )
     .then((response) => {
-      const jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
+      var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
       console.log("Datos en formato JSON:", jsonData);
 
       //  var recipientId = body.recipient_id;
@@ -1049,10 +1049,10 @@ async function callSendAPI(messageData) {
 
      console.log("createinfochat");
      try {
-      const response = await axios.get( "https://getdev-b2c0b.firebaseio.com/company/sly/chatMessage/whatsapp/.json");
+     var  response = await axios.get( "https://getdev-b2c0b.firebaseio.com/company/sly/chatMessage/whatsapp/.json");
       console.log(response.data); // Muestra los datos obtenidos
    
-      const jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
+     var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
       console.log("Datos en formato JSONprincipal:", jsonData);
     //  console.log("Datos en formato JSONprincipal:", response.data);
       idChat = jsonData.replace('"', '').replace('"', '');
@@ -1082,7 +1082,7 @@ async function callSendAPI(messageData) {
 
           createInfoChat();
         } else {
-          const jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
+          var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
 
           //  var recipientId = body.recipient_id;
           // var messageId = body.message_id;
