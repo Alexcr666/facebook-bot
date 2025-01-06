@@ -18,7 +18,7 @@ let app = express();
 
 var idChat = "";
 var recipientId = "8370375226358762";
-var opcionesMultiple ;
+var opcionesMultiple  = [];
 
 
 var repeatMessageOption = false;
