@@ -923,7 +923,7 @@ async function sendMsj(
   // if (notification == true) {
   console.error("----MENSAJE ENVIADO---" + messageText);
 
-if(opcionesMultiple.length ==0){
+if(opcionesMultiple.length == 0){
   var messageData = {
     recipient: {
       id: recipientId,
@@ -1131,8 +1131,8 @@ function initTimeFun(description){
 
 function  sendMsjAdmin(context, description){
 
-
-  sendMsj(description, "route", type, false);
+  opcionesMultiple = [];
+  sendMsj(description, "route", "chat", false);
 
 }
 
@@ -1162,19 +1162,21 @@ async function triggersFun(){
 
         
 
-        if (dataEvent.event === "Inactivo por 30 segundos") {
+        if (dataEvent.event == "Inactivo por 30 segundos") {
           initTimeFun(description);
         }
 
-        if (dataEvent.event === "Abrir chat") {
+        if (dataEvent.event == "Abrir chat") {
+
+          console.log("triggers2: "+dataEvent.event+" "+description);
           sendMsjAdmin(context, description);
         }
 
-        if (dataEvent.event === "Cerrar chat") {
+        if (dataEvent.event == "Cerrar chat") {
           closeTriggers.push(description);
         }
 
-        if (dataEvent.event === "Abrir un producto") {
+        if (dataEvent.event == "Abrir un producto") {
           openProductTriggers.push(description);
         }
       });
