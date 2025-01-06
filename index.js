@@ -18,6 +18,60 @@ let app = express();
 const idChat = "-OFnMLo038wm6BzEDc90";
 var recipientId = "8370375226358762";
 
+
+var repeatMessageOption = false;
+
+function savedAlertAgentData() {
+  var dataForm = {
+    agent: true,
+    idUser: recipientId,
+  };
+  axios
+    .post(
+      "https://getdev-b2c0b.firebaseio.com/company/sly/alertAgent/.json",
+      dataForm
+    )
+    .then((response) => {
+      if (response.status == 200) {
+      }
+    });
+}
+
+function savedAnswerData(value) {
+  var dataForm = {
+    value: value,
+  };
+  axios
+    .post(
+      "https://getdev-b2c0b.firebaseio.com/company/sly/answerValue/.json",
+      dataForm
+    )
+    .then((response) => {
+      if (response.status == 200) {
+      }
+    });
+}
+
+function savedForm(city, company, consult, email, name, phone) {
+  var dataForm = {
+    city: city,
+    company: company,
+    consult: consult,
+    email: email,
+    name: name,
+    phone: phone,
+  };
+  axios
+    .post(
+      "https://getdev-b2c0b.firebaseio.com/company/sly/formContact/.json",
+      dataForm
+    )
+    .then((response) => {
+      if (response.status == 200) {
+      }
+    });
+}
+
 //nuevo
 
 app.use(bodyParser.json());
@@ -59,22 +113,6 @@ app.post("/webhook", async function (req, res) {
 
     // Muestra los datos obtenidos
 
-    try{
-  const response = await request(
-    {
-      uri: "https://getdev-b2c0b.firebaseio.com/company/sly/chatMessage/whatsapp/.json",
-
-      method: "GET",
-    });
-
-   // var dataItemSelected = JSON.parse(response.body);
-   var data2 = response.body;
-    idChat = data2.replace('"', '').replace('"', '');
-
-    console.log("idchat23: "+idChat);
-  }catch(e){
-
-  }
 
 
 
