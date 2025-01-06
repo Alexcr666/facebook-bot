@@ -407,39 +407,50 @@ async function sendMediaVideo(title, urlData, data) {
   }
 }
 
-
-async function sendQuickReplies() {
-  const opciones = ["Opción 1", "Opción 2", "Opción 3"];
+async function sendMultipleButtonTemplates() {
+  const opciones = ["Opción 1", "Opción 2", "Opción 3", "Opción 4", "Opción 5", "Opción 6"];
   const url = `https://graph.facebook.com/v18.0/me/messages`;
 
-  // Construir las respuestas rápidas dinámicamente
-  const quickReplies = opciones.map(opcion => ({
-    content_type: "text",
-    title: opcion,
-    payload: `PAYLOAD_${opcion.replace(/\s+/g, "_").toUpperCase()}` // Crear un payload único para cada opción
-  }));
+  // Dividir las opciones en grupos de 3 botones
+  const grupos = [];
+  for (let i = 0; i < opciones.length; i += 3) {
+    grupos.push(opciones.slice(i, i + 3));
+  }
 
-  const payload = {
-    recipient: { id: recipientId },
-    message: {
-      text: "Selecciona una opción:",
-      quick_replies: quickReplies
+  for (const grupo of grupos) {
+    const buttons = grupo.map(opcion => ({
+      type: "postback",
+      title: opcion,
+      payload: `PAYLOAD_${opcion.replace(/\s+/g, "_").toUpperCase()}`
+    }));
+
+    const payload = {
+      recipient: { id: recipientId },
+      message: {
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "button",
+            text: "Selecciona una opción:",
+            buttons: buttons
+          }
+        }
+      }
+    };
+
+    try {
+      const response = await axios.post(url, payload, {
+        params: { access_token:process.env.PAGE_ACCESS_TOKEN },
+        headers: { "Content-Type": "application/json" }
+      });
+      console.log("Botones enviados exitosamente:", response.data);
+    } catch (error) {
+      console.error("Error al enviar botones:", error.response?.data || error.message);
     }
-  };
-
-  try {
-
-    
-    const response = await axios.post(url, payload, {
-      params: { access_token: process.env.PAGE_ACCESS_TOKEN },
-      headers: { "Content-Type": "application/json" }
-    });
-
-    console.log("Quick Replies enviadas exitosamente:", response.data);
-  } catch (error) {
-    console.error("Error al enviar Quick Replies:", error.response?.data || error.message);
   }
 }
+
+
 
 
 
@@ -486,7 +497,7 @@ function validationMsj(value) {
           
           }
           if (type == "multiple") {
-            sendQuickReplies();
+            sendMultipleButtonTemplates();
             if (repeatMessageOption == true) {
               repeatMessageOption = false;
               var keys = Object.keys(dataItemSelected["optionsStep"]);
@@ -529,7 +540,7 @@ function validationMsj(value) {
 
                     });*/
 
-               //   validationMsj(routeMultiple);
+                  validationMsj(routeMultiple);
                 }
               });
 
@@ -568,7 +579,7 @@ function validationMsj(value) {
               //poder
 
               repeatMessageOption = true;
-  // sendMsj(message, "route", "multiple", false);
+   sendMsj(message, "route", "multiple", false);
              /* if (route == undefined) {
             
                    sendMsj(message, "route", "multiple", false);
