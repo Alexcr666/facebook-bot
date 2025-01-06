@@ -605,7 +605,7 @@ function validationMsj(value) {
             } else {
               repeatMessageOption = true;
               console.error("ENVIA MENSAJE POLITICAS");
-              sendMsj(listString, route, type, false);
+              sendMsj(listString, "route", type, false);
             }
           }
 
@@ -619,7 +619,7 @@ function validationMsj(value) {
               validationMsj(route);
               sendMsj(listString, route, type, false);
             } else {
-              sendMsj(title, route, type, true);
+              sendMsj(title, "route", type, true);
             }
           }
 
@@ -678,7 +678,7 @@ function validationMsj(value) {
               //  sendMsj("Gracias por compartir", route, type, true);
             } else {
               repeatMessageOption =true;
-              sendMsj(listString, route, type, false);
+              sendMsj(listString, "route", type, false);
             }
           }
 
@@ -722,7 +722,8 @@ function validationMsj(value) {
                 "3.Contactar a un acesor";
                 repeatMessageOption = true;
 
-              sendMsj(listString, route, type, true);
+            // sendMsj(listString, route, type, true);
+            sendMsj(listString, "route", type, true);
             }
           }
           if (type == "media") {
@@ -747,8 +748,9 @@ function validationMsj(value) {
             // var valuePause = dataItemSelected["value"];
 
             setTimeout(function () {
-              validationMsj(route);
               sendMsj(message, route, type, false);
+              validationMsj(route);
+            
             }, 6000);
           }
 
