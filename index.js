@@ -1121,6 +1121,66 @@ function json2array(json) {
   return result;
 }
 
+const closeTriggers = [];
+const openProductTriggers = [];
+
+function initTimeFun(description){
+
+}
+
+function  sendMsjAdmin(context, description){
+
+
+  sendMsj(description, "route", type, false);
+
+}
+
+async function triggersFun(){
+
+  
+
+  try {
+    // Hacer la solicitud GET a Firebase
+    const response = await axios.get( 
+      "https://getdev-b2c0b.firebaseio.com/company/sly/triggers"+ 
+    
+      "/.json"
+    );
+
+    // Verificar si hay datos disponibles
+    if (response.data) {
+      const dataTriggersChat = response.data;
+
+      // Iterar sobre los hijos del nodo "triggers"
+      Object.keys(dataTriggersChat).forEach((key) => {
+        const dataEvent = dataTriggersChat[key];
+        const description = dataEvent.description;
+
+        if (dataEvent.event === "Inactivo por 30 segundos") {
+          initTimeFun(description);
+        }
+
+        if (dataEvent.event === "Abrir chat") {
+          sendMsjAdmin(context, description);
+        }
+
+        if (dataEvent.event === "Cerrar chat") {
+          closeTriggers.push(description);
+        }
+
+        if (dataEvent.event === "Abrir un producto") {
+          openProductTriggers.push(description);
+        }
+      });
+    } else {
+      console.log("No data available in triggers");
+    }
+  } catch (error) {
+    console.error("Error fetching triggers:", error);
+  }
+
+}
+
 
 function createInfoChat() {
   // var recipientId = "hola";
@@ -1163,6 +1223,8 @@ function createInfoChat() {
       messageData2
     )
     .then((response) => {
+
+      
       repeatChat();
       //repeatChat();
       //INICIA EL CHAT
@@ -1228,6 +1290,8 @@ async function callSendAPI(messageData) {
   console.log("message" + messageData);
 
   console.log("createinfochat");
+
+  triggersFun();
 
 
   function executeInit() {
