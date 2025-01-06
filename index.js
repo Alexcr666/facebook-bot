@@ -26,6 +26,7 @@ function capitalize(str) {
   if (!str) return ""; // Maneja cadenas vacías
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
+
 function savedAlertAgentData() {
   var dataForm = {
     agent: true,
@@ -196,7 +197,7 @@ function receivedMessage(event) {
 
 function receivedPostback(event) {
   var senderID = event.sender.id;
-var recipientID = event.recipient.id;
+  var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
 
   // The 'payload' param is a developer-defined field which is set in a postback
@@ -331,7 +332,7 @@ async function sendLink(urlData) {
   var payload = {
     recipient: {
       id: recipientId,
-      
+
     },
     message: {
       attachment: {
@@ -370,7 +371,7 @@ function sendEventAnalitics() {
 }
 
 
-async function sendMediaVideo(title,urlData,data) {
+async function sendMediaVideo(title, urlData, data) {
   const url = `https://graph.facebook.com/v18.0/me/messages`;
 
   const payload = {
@@ -391,8 +392,10 @@ async function sendMediaVideo(title,urlData,data) {
   try {
     const response = await axios.post(url, payload, {
 
-  
-      params: { access_token: process.env.PAGE_ACCESS_TOKEN },
+
+      params: {
+        access_token: process.env.PAGE_ACCESS_TOKEN
+      },
       headers: {
         "Content-Type": "application/json",
       },
@@ -406,7 +409,12 @@ async function sendMediaVideo(title,urlData,data) {
 
 function validationMsj(value) {
   //VALIDA QUE LA RUTA NO SEA VACIA
-  console.log("VALIDANDO CREATE4"+ value+" "+ "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
+
+
+  setTimeout(() => {
+   
+
+  console.log("VALIDANDO CREATE4" + value + " " + "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
     idChat +
     "/options/" +
     value +
@@ -435,16 +443,17 @@ function validationMsj(value) {
             sendMsj(title, route, type, false);
             console.error("ENVIADA EL CHAT: " + route);
 
-            setTimeout(() => {
+         
               validationMsj(route);
-            }, 1000);
+          
           }
           if (type == "multiple") {
             if (repeatMessageOption == true) {
               repeatMessageOption = false;
               var keys = Object.keys(dataItemSelected["optionsStep"]);
               var position = 0;
-             
+              var success = false;
+
               keys.forEach(function (key) {
                 console.log("datos: " + key);
 
@@ -452,6 +461,7 @@ function validationMsj(value) {
                 console.log("global: " + messageGlobal.toLowerCase());
 
                 if (key.toLowerCase() == messageGlobal.toLowerCase()) {
+                  success = true;
                   var list2 = dataItemSelected["optionsStep"];
 
                   var listProm = json2array(list2);
@@ -483,6 +493,16 @@ function validationMsj(value) {
                   validationMsj(routeMultiple);
                 }
               });
+
+              if (success == false) {
+                sendMsj(
+                  "No reconocemos esta opción",
+                  route,
+                  type,
+                  true
+                );
+
+              }
             } else {
               console.error("DATOS SELECTED1------: " + route);
 
@@ -509,7 +529,16 @@ function validationMsj(value) {
               //poder
 
               if (route == undefined) {
-                sendMsj(message, "route", "multiple", false);
+                //   sendMsj(message, "route", "multiple", false);
+                sendMsj(
+                  "No reconocemos esta opción",
+                  route,
+                  type,
+                  true
+                );
+
+
+
               } else {
                 sendMsj(message, route, type, false);
               }
@@ -557,18 +586,7 @@ function validationMsj(value) {
                     var positionFinal = position - 1;
                     route = listProm[positionFinal];
                     console.log("VALIDANDO CREATE2");
-                   /* axios
-                      .patch(
-                        "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
-                        idChat +
-                        "/options/" +
-                        value +
-                        "/.json", newData
-                      )
-                      .then((response) => {
-                        console.log('Datos actualizados23:', response.data);
 
-                      });*/
                   }
                 });
 
@@ -631,28 +649,33 @@ function validationMsj(value) {
 
             if (repeatMessageOption == true) {
               repeatMessageOption = false;
-              validationMsj(route);
+
+
+
 
               console.error("GUARDANDO FORMULARIO");
-
               let lista = messageGlobal.split(", ");
 
+              if (lista.length == 4) {
+                validationMsj(route);
+
+                var city = lista[0];
+                var company = lista[1];
+                var consult = lista[2];
+                var email = lista[3];
+                var name = lista[4];
+                var phone = lista[5];
 
 
+                savedForm(city, company, consult, email, name, phone);
+              } else {
 
-              var city = lista[0];
-              var company = lista[1];
-              var consult = lista[2];
-              var email = lista[3];
-              var name = lista[4];
-              var phone = lista[5];
-
-
-              savedForm(city, company, consult, email, name, phone);
+                sendMsj("Faltan campos por llenar", route, type, true);
+              }
 
               //  sendMsj("Gracias por compartir", route, type, true);
             } else {
-              sendMsj(listString, route, type, true);
+              sendMsj(listString, route, type, false);
             }
           }
 
@@ -668,17 +691,23 @@ function validationMsj(value) {
               if (messageGlobal == "1") {
                 repeatMessageOption = false;
                 sendMsj("Gracias por comunicarte", route, type, true);
+              } else {
+
+                if (messageGlobal == "2") {
+                  repeatMessageOption = false;
+                  repeatChat();
+                } else {
+                  if (messageGlobal == "3") {
+                    repeatMessageOption = false;
+                    savedAlertAgentData();
+                    sendMsj("Buscando agentes disponibles", route, type, true);
+                  } else {
+                    sendMsj("Elige alguna opción", route, type, true);
+                  }
+
+                }
               }
 
-              if (messageGlobal == "2") {
-                repeatMessageOption = false;
-                repeatChat();
-              }
-              if (messageGlobal == "3") {
-                repeatMessageOption = false;
-                savedAlertAgentData();
-                sendMsj("Buscando agentes disponibles", route, type, true);
-              }
             } else {
               var listString =
                 "Deseas terminar la converzación" +
@@ -757,6 +786,7 @@ function validationMsj(value) {
   } else {
     console.log("------CHAT FINALIZADO------");
   }
+}, 500);
 }
 
 
@@ -777,7 +807,7 @@ async function sendMsj(
     routeStep: route,
     type: type,
 
-    information: false,
+    information: notification,
     text: messageText,
     receipt: recipientId,
   };
@@ -830,7 +860,7 @@ async function sendMsj(
     },
     function (error, response, body) {
       if (!error && response.statusCode == 200) {
-       var recipientId = body.recipient_id;
+        var recipientId = body.recipient_id;
         var messageId = body.message_id;
 
         console.log(
@@ -1009,7 +1039,7 @@ function json2array(json) {
 
 
 function createInfoChat() {
- // var recipientId = "hola";
+  // var recipientId = "hola";
   var messageData2 = {
     apertura: 0,
     typeOpen: "facebook",
@@ -1068,7 +1098,7 @@ function repeatChat() {
       var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
       console.log("Datos en formato JSON:", jsonData);
 
-    //   var recipientId = body.recipient_id;
+      //   var recipientId = body.recipient_id;
       // var messageId = body.message_id;
 
       var obj = JSON.parse(jsonData);
@@ -1101,7 +1131,7 @@ function repeatChat() {
       console.error("body: " + title);
 
       console.log("Successfully firebase" + response.data);
-      sendMsj(title, route, type, true);
+      sendMsj(title, route, type, false);
 
       validationMsj(route);
     });
@@ -1138,7 +1168,7 @@ async function callSendAPI(messageData) {
           console.log("CREATE INFO CHAT2");
           var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
 
-        //  var recipientId = body.recipient_id;
+          //  var recipientId = body.recipient_id;
           // var messageId = body.message_id;
 
           var obj = JSON.parse(jsonData);
