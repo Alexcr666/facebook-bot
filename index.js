@@ -407,6 +407,42 @@ async function sendMediaVideo(title, urlData, data) {
   }
 }
 
+
+async function sendQuickReplies() {
+  const opciones = ["Opción 1", "Opción 2", "Opción 3"];
+  const url = `https://graph.facebook.com/v18.0/me/messages`;
+
+  // Construir las respuestas rápidas dinámicamente
+  const quickReplies = opciones.map(opcion => ({
+    content_type: "text",
+    title: opcion,
+    payload: `PAYLOAD_${opcion.replace(/\s+/g, "_").toUpperCase()}` // Crear un payload único para cada opción
+  }));
+
+  const payload = {
+    recipient: { id: recipientId },
+    message: {
+      text: "Selecciona una opción:",
+      quick_replies: quickReplies
+    }
+  };
+
+  try {
+
+    
+    const response = await axios.post(url, payload, {
+      params: { access_token: process.env.PAGE_ACCESS_TOKEN },
+      headers: { "Content-Type": "application/json" }
+    });
+
+    console.log("Quick Replies enviadas exitosamente:", response.data);
+  } catch (error) {
+    console.error("Error al enviar Quick Replies:", error.response?.data || error.message);
+  }
+}
+
+
+
 function validationMsj(value) {
   //VALIDA QUE LA RUTA NO SEA VACIA
 
@@ -450,6 +486,7 @@ function validationMsj(value) {
           
           }
           if (type == "multiple") {
+            sendQuickReplies();
             if (repeatMessageOption == true) {
               repeatMessageOption = false;
               var keys = Object.keys(dataItemSelected["optionsStep"]);
