@@ -1012,7 +1012,7 @@ function repeatChat() {
       var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
       console.log("Datos en formato JSON:", jsonData);
 
-       var recipientId = body.recipient_id;
+    //   var recipientId = body.recipient_id;
       // var messageId = body.message_id;
 
       var obj = JSON.parse(jsonData);
