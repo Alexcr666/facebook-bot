@@ -142,6 +142,8 @@ app.post("/webhook", async function (req, res) {
           const payload = event.postback.payload;
           
        messageGlobal =    payload;
+
+
        console.log("mensaje34: "+messageGlobal);
   
           receivedPostback(event);
@@ -1045,6 +1047,48 @@ if(opcionesMultiple.length == 0){
   // }
 }
 
+
+
+async function sendMsjNoNotification(
+  messageText,
+  route,
+  type,
+  /* information,*/
+  notification
+) {
+  //if(route != null){
+  console.log("-----sendmsj---: " + route);
+
+  console.log("routestep1: " + messageText);
+  var messageData2 = {
+    routeStep: route,
+    type: type,
+
+    information: notification,
+    text: messageText,
+    receipt: recipientId,
+  };
+
+  axios
+    .post(
+      "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/" +
+      recipientId +
+      ".json",
+      messageData2
+    )
+    .then((response) => {
+      if (response.status == 200) {
+       
+
+        console.log("Successfully firebase id ");
+      } else {
+        console.error("Unable to send message.");
+        console.error(response);
+      }
+    });
+
+}
+
 // }
 //}
 /*
@@ -1301,7 +1345,7 @@ async function callSendAPI(messageData) {
 
   triggersFun();
 
-
+  sendMsj(messageGlobal, "information", "chat", true);
   function executeInit() {
 
     axios
