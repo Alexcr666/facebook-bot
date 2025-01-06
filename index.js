@@ -440,8 +440,9 @@ function validationMsj(value) {
           var title = dataItemSelected["title"];
 
           if (type == "chat" || type == "text") {
-            sendMsj(title, route, type, false);
             repeatMessageOption = false;
+            sendMsj(title, route, type, false);
+          
             console.error("ENVIADA EL CHAT: " + route);
 
          
@@ -478,7 +479,7 @@ function validationMsj(value) {
                   };
 
                   console.log("VALIDANDO CREATE1-");
-                  axios
+                 /* axios
                     .patch(
                       "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
                       idChat +
@@ -489,7 +490,7 @@ function validationMsj(value) {
                     .then((response) => {
                       console.log('Datos actualizados23:', response.data);
 
-                    });
+                    });*/
 
                   validationMsj(routeMultiple);
                 }
@@ -529,22 +530,19 @@ function validationMsj(value) {
               //firme
               //poder
 
-              if (route == undefined) {
+              repeatMessageOption = true;
+   sendMsj(message, "route", "multiple", false);
+             /* if (route == undefined) {
             
-                //   sendMsj(message, "route", "multiple", false);
-                sendMsj(
-                  "No reconocemos esta opción",
-                  route,
-                  type,
-                  true
-                );
+                   sendMsj(message, "route", "multiple", false);
+               
 
 
 
               } else {
                 repeatMessageOption = true;
                 sendMsj(message, route, type, false);
-              }
+              }*/
             }
           }
 
