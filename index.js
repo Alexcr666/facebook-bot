@@ -147,6 +147,7 @@ app.post("/webhook", async function (req, res) {
           }
 
           const payload = event.postback.payload;
+          console.log("selector23text: "+payload);
           console.log("selector23: "+obtenerNumeroDeString(payload));
           var position = (obtenerNumeroDeString(payload)-1);
        messageGlobal =    opcionesMultipleValue [position];
