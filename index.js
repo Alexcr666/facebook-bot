@@ -422,7 +422,7 @@ function validationMsj(value) {
               
                   };
 
-                  console.log("VALIDANDO CREATE1");
+                  console.log("VALIDANDO CREATE1-");
                   axios
                   .patch(
                     "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
