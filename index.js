@@ -441,6 +441,7 @@ function validationMsj(value) {
 
           if (type == "chat" || type == "text") {
             sendMsj(title, route, type, false);
+            repeatMessageOption = false;
             console.error("ENVIADA EL CHAT: " + route);
 
          
@@ -529,6 +530,7 @@ function validationMsj(value) {
               //poder
 
               if (route == undefined) {
+            
                 //   sendMsj(message, "route", "multiple", false);
                 sendMsj(
                   "No reconocemos esta opción",
@@ -540,6 +542,7 @@ function validationMsj(value) {
 
 
               } else {
+                repeatMessageOption = true;
                 sendMsj(message, route, type, false);
               }
             }
@@ -602,6 +605,7 @@ function validationMsj(value) {
                 );
               }
             } else {
+              repeatMessageOption = true;
               console.error("ENVIA MENSAJE POLITICAS");
               sendMsj(listString, route, type, false);
             }
@@ -675,6 +679,7 @@ function validationMsj(value) {
 
               //  sendMsj("Gracias por compartir", route, type, true);
             } else {
+              repeatMessageOption =true;
               sendMsj(listString, route, type, false);
             }
           }
@@ -717,6 +722,7 @@ function validationMsj(value) {
                 "2.Ir al inicio" +
                 "\n" +
                 "3.Contactar a un acesor";
+                repeatMessageOption = true;
 
               sendMsj(listString, route, type, true);
             }
