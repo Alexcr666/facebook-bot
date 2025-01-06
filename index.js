@@ -366,7 +366,7 @@ function sendEventAnalitics() {
 
 function validationMsj(value) {
   //VALIDA QUE LA RUTA NO SEA VACIA
-  console.log("VALIDANDO CREATE4");
+  console.log("VALIDANDO CREATE4"+ value);
   if (value != null) {
     axios
       .get(
