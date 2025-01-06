@@ -15,7 +15,6 @@ var messengerButton =
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
-//var idChat = "-OFnMLo038wm6BzEDc90";
 
 var idChat = "";
 var recipientId = "8370375226358762";
@@ -34,8 +33,7 @@ function savedAlertAgentData() {
       dataForm
     )
     .then((response) => {
-      if (response.status == 200) {
-      }
+      if (response.status == 200) {}
     });
 }
 
@@ -49,8 +47,7 @@ function savedAnswerData(value) {
       dataForm
     )
     .then((response) => {
-      if (response.status == 200) {
-      }
+      if (response.status == 200) {}
     });
 }
 
@@ -69,8 +66,7 @@ function savedForm(city, company, consult, email, name, phone) {
       dataForm
     )
     .then((response) => {
-      if (response.status == 200) {
-      }
+      if (response.status == 200) {}
     });
 }
 
@@ -99,7 +95,9 @@ app.get("/webhook", function (req, res) {
 
 // Display the web page
 app.get("/", function (req, res) {
-  res.writeHead(200, { "Content-Type": "text/html" });
+  res.writeHead(200, {
+    "Content-Type": "text/html"
+  });
   res.write(messengerButton);
   res.end();
 });
@@ -111,7 +109,7 @@ app.post("/webhook", async function (req, res) {
 
   // Make sure this is a page subscription
   if (data.object === "page") {
-   // createInfoChat();
+    // createInfoChat();
 
     // Muestra los datos obtenidos
 
@@ -152,7 +150,7 @@ var messageGlobal;
 // Incoming events handling
 function receivedMessage(event) {
   var senderID = event.sender.id;
-  var recipientID = event.recipient.id;
+  //var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
@@ -171,10 +169,10 @@ function receivedMessage(event) {
 
   var messageText = message.text;
   messageReceip = message.text;
-  messageGlobal =  messageReceip;
+  messageGlobal = messageReceip;
   var messageAttachments = message.attachments;
-  
-    console.log("message45: "+messageText);
+
+  console.log("message45: " + messageText);
 
   if (messageText) {
     // If we receive a text message, check to see if it matches a keyword
@@ -194,7 +192,7 @@ function receivedMessage(event) {
 
 function receivedPostback(event) {
   var senderID = event.sender.id;
-  var recipientID = event.recipient.id;
+  //var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
 
   // The 'payload' param is a developer-defined field which is set in a postback
@@ -240,14 +238,12 @@ function sendGenericMessage(recipientId) {
         type: "template",
         payload: {
           template_type: "generic",
-          elements: [
-            {
+          elements: [{
               title: "rift",
               subtitle: "Next-generation virtual reality",
               item_url: "https://www.oculus.com/en-us/rift/",
               image_url: "http://messengerdemo.parseapp.com/img/rift.png",
-              buttons: [
-                {
+              buttons: [{
                   type: "web_url",
                   url: "https://www.oculus.com/en-us/rift/",
                   title: "Open Web URL",
@@ -264,8 +260,7 @@ function sendGenericMessage(recipientId) {
               subtitle: "Your Hands, Now in VR",
               item_url: "https://www.oculus.com/en-us/touch/",
               image_url: "http://messengerdemo.parseapp.com/img/touch.png",
-              buttons: [
-                {
+              buttons: [{
                   type: "web_url",
                   url: "https://www.oculus.com/en-us/touch/",
                   title: "Open Web URL",
@@ -283,12 +278,12 @@ function sendGenericMessage(recipientId) {
     },
   };
 
- callSendAPI(messageData);
+  callSendAPI(messageData);
 }
 
 
-async function sendMedia(title,media,url3) {
-  
+async function sendMedia(title, media, url3) {
+
   var url = `https://graph.facebook.com/v18.0/me/messages`;
 
   var payload = {
@@ -308,7 +303,9 @@ async function sendMedia(title,media,url3) {
 
   try {
     var response = await axios.post(url, payload, {
-      params: { access_token: PAGE_ACCESS_TOKEN },
+      params: {
+        access_token: PAGE_ACCESS_TOKEN
+      },
       headers: {
         "Content-Type": "application/json",
       },
@@ -324,7 +321,7 @@ async function sendMedia(title,media,url3) {
 
 
 
-async function sendLink( urlData) {
+async function sendLink(urlData) {
   var url = `https://graph.facebook.com/v18.0/me/messages`;
 
   var payload = {
@@ -337,13 +334,11 @@ async function sendLink( urlData) {
         payload: {
           template_type: "button",
           text: "¡Haz clic en el siguiente enlace!",
-          buttons: [
-            {
-              type: "web_url",
-              url: urlData,
-              title: "Visitar enlace",
-            },
-          ],
+          buttons: [{
+            type: "web_url",
+            url: urlData,
+            title: "Visitar enlace",
+          }, ],
         },
       },
     },
@@ -351,7 +346,9 @@ async function sendLink( urlData) {
 
   try {
     var response = await axios.post(url, payload, {
-      params: { access_token: PAGE_ACCESS_TOKEN },
+      params: {
+        access_token: PAGE_ACCESS_TOKEN
+      },
       headers: {
         "Content-Type": "application/json",
       },
@@ -362,8 +359,9 @@ async function sendLink( urlData) {
     console.error("Error al enviar el enlace:", error.response?.data || error.message);
   }
 }
-function sendEventAnalitics(){
-  
+
+function sendEventAnalitics() {
+
 }
 
 function validationMsj(value) {
@@ -373,10 +371,10 @@ function validationMsj(value) {
     axios
       .get(
         "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
-          idChat +
-          "/options/" +
-          value +
-          "/.json"
+        idChat +
+        "/options/" +
+        value +
+        "/.json"
       )
       .then((response) => {
         if (response.status == 200) {
@@ -421,22 +419,22 @@ function validationMsj(value) {
                   console.error("RUTA SELECCIONADA MULTIPLE: " + routeMultiple);
                   var newData = {
                     routeStep: routeMultiple,
-              
+
                   };
 
                   console.log("VALIDANDO CREATE1-");
                   axios
-                  .patch(
-                    "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
+                    .patch(
+                      "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
                       idChat +
                       "/options/" +
                       value +
-                      "/.json",newData
-                  )
-                  .then((response) => {
-                    console.log('Datos actualizados23:', response.data);
+                      "/.json", newData
+                    )
+                    .then((response) => {
+                      console.log('Datos actualizados23:', response.data);
 
-                  });
+                    });
 
                   validationMsj(routeMultiple);
                 }
@@ -484,21 +482,21 @@ function validationMsj(value) {
               "\n" +
               "2.Rechazar";
             if (repeatMessageOption == true) {
-              
-              console.error("VALIDA EL MENSAJE RESPUESTA POLITICAS: "+ messageGlobal );
+
+              console.error("VALIDA EL MENSAJE RESPUESTA POLITICAS: " + messageGlobal);
               if (messageGlobal == "1") {
 
                 var list2 = dataItemSelected["optionsStep"];
 
-            
-            
-
-                  var listProm = json2array(list2);
-                  
 
 
-                  console.error("VALIDA EL CONTENIDO DE LA LISTA TEMS: "+ listProm );
-                
+
+                var listProm = json2array(list2);
+
+
+
+                console.error("VALIDA EL CONTENIDO DE LA LISTA TEMS: " + listProm);
+
 
 
 
@@ -506,30 +504,31 @@ function validationMsj(value) {
 
                 var keys = Object.keys(dataItemSelected["optionsStep"]);
                 keys.forEach(function (key) {
-                 
+
                   position += 1;
-               
-  
+
+
                   if (key.toLowerCase() == "si") {
-                   
+
                     var positionFinal = position - 1;
-                  route = listProm[positionFinal];
-                  console.log("VALIDANDO CREATE2");
-                  axios
-                  .patch(
-                    "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
-                      idChat +
-                      "/options/" +
-                      value +
-                      "/.json",newData
-                  )
-                  .then((response) => {
-                    console.log('Datos actualizados23:', response.data);
+                    route = listProm[positionFinal];
+                    console.log("VALIDANDO CREATE2");
+                    axios
+                      .patch(
+                        "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
+                        idChat +
+                        "/options/" +
+                        value +
+                        "/.json", newData
+                      )
+                      .then((response) => {
+                        console.log('Datos actualizados23:', response.data);
 
-                  });
-                  }});
+                      });
+                  }
+                });
 
-                  console.error("RUTA SELECCIONADA TERMS"+ route);
+                console.error("RUTA SELECCIONADA TERMS" + route);
                 repeatMessageOption = false;
                 validationMsj(route);
               } else {
@@ -583,7 +582,7 @@ function validationMsj(value) {
               let lista = messageGlobal.split(", ");
 
 
-           
+
 
               var city = lista[0];
               var company = lista[1];
@@ -591,11 +590,11 @@ function validationMsj(value) {
               var email = lista[3];
               var name = lista[4];
               var phone = lista[5];
-              
+
 
               savedForm(city, company, consult, email, name, phone);
 
-            //  sendMsj("Gracias por compartir", route, type, true);
+              //  sendMsj("Gracias por compartir", route, type, true);
             } else {
               sendMsj(listString, route, type, true);
             }
@@ -646,9 +645,9 @@ function validationMsj(value) {
             var type = dataItemSelected["typeUrl"];
 
             if (type == "Imagen") {
-              sendMedia(title,url,'image');
+              sendMedia(title, url, 'image');
             } else {
-              sendMediaVideo(title,url,'video');
+              sendMediaVideo(title, url, 'video');
             }
 
             validationMsj(route);
@@ -711,7 +710,8 @@ async function sendMsj(
   messageText,
   route,
   type,
-  /* information,*/ notification
+  /* information,*/
+  notification
 ) {
   //if(route != null){
   console.log("-----sendmsj---: " + route);
@@ -729,8 +729,8 @@ async function sendMsj(
   axios
     .post(
       "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/" +
-        recipientId +
-        ".json",
+      recipientId +
+      ".json",
       messageData2
     )
     .then((response) => {
@@ -764,16 +764,17 @@ async function sendMsj(
       text: messageText,
     },
   };
-  request(
-    {
+  request({
       uri: "https://graph.facebook.com/v2.6/me/messages",
-      qs: { access_token: process.env.PAGE_ACCESS_TOKEN },
+      qs: {
+        access_token: process.env.PAGE_ACCESS_TOKEN
+      },
       method: "POST",
       json: messageData,
     },
     function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        var recipientId = body.recipient_id;
+     //   var recipientId = body.recipient_id;
         var messageId = body.message_id;
 
         console.log(
@@ -872,8 +873,8 @@ async function sendMsj(
 
   // }
 }
-  
- // }
+
+// }
 //}
 /*
 function callSendAPI(messageData) {
@@ -940,18 +941,19 @@ function callSendAPI(messageData) {
 
 var idData;
 var routeData;
-     function json2array(json){
-    var result = [];
-    var keys = Object.keys(json);
-    keys.forEach(function(key){
-        result.push(json[key]);
-    });
-    return result;
+
+function json2array(json) {
+  var result = [];
+  var keys = Object.keys(json);
+  keys.forEach(function (key) {
+    result.push(json[key]);
+  });
+  return result;
 }
 
 
-function  createInfoChat(){
-  var recipientId = "hola";
+function createInfoChat() {
+ // var recipientId = "hola";
   var messageData2 = {
     apertura: 0,
     typeOpen: "facebook",
@@ -1003,8 +1005,8 @@ function repeatChat() {
   axios
     .get(
       "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
-        idChat +
-        "/options/.json"
+      idChat +
+      "/options/.json"
     )
     .then((response) => {
       var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
@@ -1018,9 +1020,9 @@ function repeatChat() {
       var listJson = json2array(obj);
       console.log(
         "lenghtoptionsinit : " +
-          json2array(obj).length +
-          " : " +
-          json2array(obj)[0]
+        json2array(obj).length +
+        " : " +
+        json2array(obj)[0]
       );
 
       var dataItemSelected;
@@ -1050,123 +1052,123 @@ function repeatChat() {
 }
 
 async function callSendAPI(messageData) {
-  
-     console.log("message" + messageData);
 
-     console.log("createinfochat");
+  console.log("message" + messageData);
+
+  console.log("createinfochat");
 
 
-    function executeInit(){
+  function executeInit() {
 
     axios
-    .get(
-      "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/" +
+      .get(
+        "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/" +
         recipientId +
         "/.json"
-    )
-    .then((response) => {
-      //CONSULTA LOS MENSAJES DEL USUARIO
+      )
+      .then((response) => {
+        //CONSULTA LOS MENSAJES DEL USUARIO
 
-      if (response.data == null) {
+        if (response.data == null) {
 
-        console.log("CREATE INFO CHAT");
-      
+          console.log("CREATE INFO CHAT");
 
-        //CREA LA INFORMACIÓN DE LA CONVERZACIÓN
 
-        createInfoChat();
-      } else {
+          //CREA LA INFORMACIÓN DE LA CONVERZACIÓN
 
-        console.log("CREATE INFO CHAT2");
-        var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
+          createInfoChat();
+        } else {
 
-        //  var recipientId = body.recipient_id;
-        // var messageId = body.message_id;
+          console.log("CREATE INFO CHAT2");
+          var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
 
-        var obj = JSON.parse(jsonData);
+          //  var recipientId = body.recipient_id;
+          // var messageId = body.message_id;
 
-        var listJson = json2array(obj);
+          var obj = JSON.parse(jsonData);
 
-        let dataItemSelected = [];
+          var listJson = json2array(obj);
 
-        //VALIDA LOS MENSAJES INFORMATIVOS
-        for (var i = 0; i < json2array(obj).length; i++) {
-          var dataItem = json2array(obj)[i];
+          let dataItemSelected = [];
 
-          if (dataItem["information"] != true) {
-            dataItemSelected.push(dataItem);
+          //VALIDA LOS MENSAJES INFORMATIVOS
+          for (var i = 0; i < json2array(obj).length; i++) {
+            var dataItem = json2array(obj)[i];
+
+            if (dataItem["information"] != true) {
+              dataItemSelected.push(dataItem);
+            }
           }
+
+          // GENERA LA POSICION DE LAS 2 ULTIMAS
+          var position = dataItemSelected.length - 2; //changed1
+
+          var route = dataItemSelected[position]["routeStep"];
+          console.error("LA RUTA EN EL INICIO DE LA APP1: " + route);
+          if (route == "route") {
+
+            route = dataItemSelected[dataItemSelected.length - 1]["routeStep"];
+
+          }
+
+          console.error("LA RUTA EN EL INICIO DE LA APP2: " + route);
+          var type = dataItemSelected[dataItemSelected.length - 1]["type"];
+
+          console.error("EL TIPO DE MENSAJE EN EL INICIO DE LA APP: " + type);
+
+          if (
+            type == "multiple" ||
+            type == "answer" ||
+            type == "form" ||
+            type == "end" ||
+            type == "terms"
+          ) {
+            repeatMessageOption = true;
+          }
+
+          validationMsj(route);
         }
+      })
+      .catch((error) => {
+        console.log(error); // Manejo de errores
+      });
 
-        // GENERA LA POSICION DE LAS 2 ULTIMAS
-        var position = dataItemSelected.length - 2; //changed1
+  }
+  try {
+    var response = await axios.get("https://getdev-b2c0b.firebaseio.com/company/sly/chatMessage/whatsapp/.json");
+    console.log(response.data); // Muestra los datos obtenidos
 
-        var route = dataItemSelected[position]["routeStep"];
-        console.error("LA RUTA EN EL INICIO DE LA APP1: " + route);
-        if(route == "route"){
-
-        route = dataItemSelected[dataItemSelected.length - 1]["routeStep"];
-
-        }
-
-        console.error("LA RUTA EN EL INICIO DE LA APP2: " + route);
-        var type = dataItemSelected[dataItemSelected.length - 1]["type"];
-
-        console.error("EL TIPO DE MENSAJE EN EL INICIO DE LA APP: " + type);
-
-        if (
-          type == "multiple" ||
-          type == "answer" ||
-          type == "form" ||
-          type == "end" ||
-          type == "terms"
-        ) {
-          repeatMessageOption = true;
-        }
-
-        validationMsj(route);
-      }
-    })
-    .catch((error) => {
-      console.log(error); // Manejo de errores
-    });
-
-     }
-     try {
-     var  response = await axios.get( "https://getdev-b2c0b.firebaseio.com/company/sly/chatMessage/whatsapp/.json");
-      console.log(response.data); // Muestra los datos obtenidos
-   
-     var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
-      console.log("Datos en formato JSONprincipal:", jsonData);
+    var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
+    console.log("Datos en formato JSONprincipal:", jsonData);
     //  console.log("Datos en formato JSONprincipal:", response.data);
-      idChat = jsonData.replace('"', '').replace('"', '');
-      executeInit();
+    idChat = jsonData.replace('"', '').replace('"', '');
+    executeInit();
 
-      console.log("Datos en formato JSONprincipal68: "+ idChat);
-    } catch (error) {
-      console.error('Error al obtener datos:', error.message);
-    }
+    console.log("Datos en formato JSONprincipal68: " + idChat);
+  } catch (error) {
+    console.error('Error al obtener datos:', error.message);
+  }
 
-    
 
-   
 
-    // send a reply message as per the docs here https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages
 
-    // mark incoming message as read
-    /* await axios({
-      method: "POST",
-      url: `https://graph.facebook.com/v18.0/${business_phone_number_id}/messages`,
-      headers: {
-        Authorization: `Bearer ${GRAPH_API_TOKEN}`,
-      },
-      data: {
-        messaging_product: "whatsapp",
-        status: "read",
-        message_id: message.id,
-      },
-    });*/
-  
+
+  // send a reply message as per the docs here https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages
+
+  // mark incoming message as read
+  /* await axios({
+    method: "POST",
+    url: `https://graph.facebook.com/v18.0/${business_phone_number_id}/messages`,
+    headers: {
+      Authorization: `Bearer ${GRAPH_API_TOKEN}`,
+    },
+    data: {
+      messaging_product: "whatsapp",
+      status: "read",
+      message_id: message.id,
+    },
+  });*/
+
 
 }
 
