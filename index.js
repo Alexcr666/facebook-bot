@@ -1130,10 +1130,10 @@ function repeatChat() {
 
       console.log("Successfully firebase2: " + response.data + "  :  ");
 
-      var title = dataItemSelected["title"];
-      console.log("Successfully firebase566" + dataItemSelected.key);
-      var route = dataItemSelected.key;
-      var type = dataItemSelected["type"];
+    //  var title = dataItemSelected["title"];
+    //  console.log("Successfully firebase566" + dataItemSelected.key);
+      var route = dataItemSelected["id"];
+   //   var type = dataItemSelected["type"];
 
       console.error("body2: " + title);
 
