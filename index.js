@@ -150,6 +150,7 @@ app.post("/webhook", async function (req, res) {
           console.log("selector23: "+obtenerNumeroDeString(payload));
           var position = (obtenerNumeroDeString(payload)-1);
        messageGlobal =    opcionesMultipleValue [position];
+       console.log("mensaje34: "+messageGlobal);
   
           receivedPostback(event);
         } else {
