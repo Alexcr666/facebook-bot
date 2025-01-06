@@ -1131,13 +1131,15 @@ function repeatChat() {
       console.log("Successfully firebase2: " + response.data + "  :  ");
 
       var title = dataItemSelected["title"];
-      var route = dataItemSelected["routeStep"];
+      console.log("Successfully firebase566" + dataItemSelected.key);
+      var route = dataItemSelected.key;
       var type = dataItemSelected["type"];
 
-      console.error("body: " + title);
+      console.error("body2: " + title);
 
-      console.log("Successfully firebase" + response.data);
-     // sendMsj(title, route, type, false);
+    
+    //  sendMsj(title, route, type, false);
+   
 
       validationMsj(route);
     });
