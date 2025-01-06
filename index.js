@@ -716,7 +716,7 @@ async function sendMsj(
   //if(route != null){
   console.log("-----sendmsj---: " + route);
 
-  console.log("routestep: " + route);
+  console.log("routestep1: " + messageText);
   var messageData2 = {
     routeStep: route,
     type: type,
