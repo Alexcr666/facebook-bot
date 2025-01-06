@@ -557,7 +557,7 @@ function validationMsj(value) {
                     var positionFinal = position - 1;
                     route = listProm[positionFinal];
                     console.log("VALIDANDO CREATE2");
-                    axios
+                   /* axios
                       .patch(
                         "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
                         idChat +
@@ -568,7 +568,7 @@ function validationMsj(value) {
                       .then((response) => {
                         console.log('Datos actualizados23:', response.data);
 
-                      });
+                      });*/
                   }
                 });
 
