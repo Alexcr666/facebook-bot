@@ -366,6 +366,7 @@ function sendEventAnalitics(){
 
 function validationMsj(value) {
   //VALIDA QUE LA RUTA NO SEA VACIA
+  console.log("VALIDANDO CREATE4");
   if (value != null) {
     axios
       .get(
@@ -420,6 +421,8 @@ function validationMsj(value) {
                     routeStep: routeMultiple,
               
                   };
+
+                  console.log("VALIDANDO CREATE1");
                   axios
                   .patch(
                     "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
@@ -509,7 +512,7 @@ function validationMsj(value) {
                    
                     var positionFinal = position - 1;
                   route = listProm[positionFinal];
-
+                  console.log("VALIDANDO CREATE2");
                   axios
                   .patch(
                     "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
@@ -994,6 +997,7 @@ function  createInfoChat(){
 
 
 function repeatChat() {
+  console.log("VALIDANDO CREATE3");
   axios
     .get(
       "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
