@@ -366,7 +366,11 @@ function sendEventAnalitics() {
 
 function validationMsj(value) {
   //VALIDA QUE LA RUTA NO SEA VACIA
-  console.log("VALIDANDO CREATE4"+ value);
+  console.log("VALIDANDO CREATE4"+ value+" "+ "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
+    idChat +
+    "/options/" +
+    value +
+    "/.json");
   if (value != null) {
     axios
       .get(
@@ -400,7 +404,7 @@ function validationMsj(value) {
               repeatMessageOption = false;
               var keys = Object.keys(dataItemSelected["optionsStep"]);
               var position = 0;
-              var result45 = true;
+             
               keys.forEach(function (key) {
                 console.log("datos: " + key);
 
