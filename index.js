@@ -617,10 +617,12 @@ function validationMsj(value) {
               "1.Aceptar" +
               "\n" +
               "2.Rechazar";
+
+              opcionesMultiple ["Aceptar","Rechazar"];
             if (repeatMessageOption == true) {
 
               console.error("VALIDA EL MENSAJE RESPUESTA POLITICAS: " + messageGlobal);
-              if (messageGlobal == "1") {
+              if (messageGlobal == "Aceptar") {
 
                 var list2 = dataItemSelected["optionsStep"];
 
@@ -655,6 +657,7 @@ function validationMsj(value) {
 
                 console.error("RUTA SELECCIONADA TERMS" + route);
                 repeatMessageOption = false;
+                opcionesMultiple = [];
                 validationMsj(route);
               } else {
                 sendMsj(
@@ -753,16 +756,18 @@ function validationMsj(value) {
           if (type == "end") {
             if (repeatMessageOption == true) {
               console.log("VALIDAR FINALIZACIÓN CHAT");
-              if (messageGlobal == "1") {
+              opcionesMultiple = [];
+              if (messageGlobal == "Si") {
+                
                 repeatMessageOption = false;
                 sendMsj("Gracias por comunicarte", route, type, true);
               } else {
 
-                if (messageGlobal == "2") {
+                if (messageGlobal == "Ir al inicio") {
                   repeatMessageOption = false;
                   repeatChat();
                 } else {
-                  if (messageGlobal == "3") {
+                  if (messageGlobal == "Contactar a un acesor") {
                     repeatMessageOption = false;
                     savedAlertAgentData();
                     sendMsj("Buscando agentes disponibles", route, type, true);
@@ -782,6 +787,8 @@ function validationMsj(value) {
                 "2.Ir al inicio" +
                 "\n" +
                 "3.Contactar a un acesor";
+
+                opcionesMultiple = ["Si","Ir al inicio","Contactar a un acesor"]
                 repeatMessageOption = true;
 
             // sendMsj(listString, route, type, true);
