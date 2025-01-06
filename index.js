@@ -761,6 +761,12 @@ function validationMsj(value) {
                 
                 repeatMessageOption = false;
                 sendMsj("Gracias por comunicarte", route, type, true);
+                setTimeout(function () {
+                  repeatChat();
+                
+                }, 3000);
+              
+             
               } else {
 
                 if (messageGlobal == "Ir al inicio") {
@@ -1282,6 +1288,10 @@ async function callSendAPI(messageData) {
 
           console.error("EL TIPO DE MENSAJE EN EL INICIO DE LA APP: " + type);
 
+          if(route != undefined){
+
+          
+
           if (
             type == "multiple" ||
             type == "answer" ||
@@ -1293,6 +1303,18 @@ async function callSendAPI(messageData) {
           }
 
           validationMsj(route);
+        }else{
+          repeatMessageOption = false;
+          sendMsj("No hay mas opciones", "route", type, false);
+          sendMsj("Iniciando chat", "route", type, false);
+
+       
+      
+          setTimeout(function () {
+            repeatChat();
+          
+          }, 1500);
+        }
         }
       })
       .catch((error) => {
