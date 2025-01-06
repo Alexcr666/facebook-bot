@@ -369,6 +369,41 @@ function sendEventAnalitics() {
 
 }
 
+
+async function sendMediaVideo(title,urlData,data) {
+  const url = `https://graph.facebook.com/v18.0/me/messages`;
+
+  const payload = {
+    recipient: {
+      id: recipientId,
+    },
+    message: {
+      attachment: {
+        type: "video",
+        payload: {
+          url: urlData,
+          is_reusable: true, // Guardar el video como reutilizable
+        },
+      },
+    },
+  };
+
+  try {
+    const response = await axios.post(url, payload, {
+
+  
+      params: { access_token: process.env.PAGE_ACCESS_TOKEN },
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("Video enviado exitosamente:", response.data);
+  } catch (error) {
+    console.error("Error al enviar el video:", error.response?.data || error.message);
+  }
+}
+
 function validationMsj(value) {
   //VALIDA QUE LA RUTA NO SEA VACIA
   console.log("VALIDANDO CREATE4"+ value+" "+ "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
