@@ -529,7 +529,7 @@ function validationMsj(value) {
 
                     });*/
 
-                  validationMsj(routeMultiple);
+               //   validationMsj(routeMultiple);
                 }
               });
 
@@ -568,7 +568,7 @@ function validationMsj(value) {
               //poder
 
               repeatMessageOption = true;
-   sendMsj(message, "route", "multiple", false);
+  // sendMsj(message, "route", "multiple", false);
              /* if (route == undefined) {
             
                    sendMsj(message, "route", "multiple", false);
