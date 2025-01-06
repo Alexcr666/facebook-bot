@@ -15,7 +15,9 @@ var messengerButton =
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
-var idChat = "-OFnMLo038wm6BzEDc90";
+//var idChat = "-OFnMLo038wm6BzEDc90";
+
+var idChat = "";
 var recipientId = "8370375226358762";
 
 
@@ -1052,6 +1054,84 @@ async function callSendAPI(messageData) {
      console.log("message" + messageData);
 
      console.log("createinfochat");
+
+
+    function executeInit(){
+
+    axios
+    .get(
+      "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/" +
+        recipientId +
+        "/.json"
+    )
+    .then((response) => {
+      //CONSULTA LOS MENSAJES DEL USUARIO
+
+      if (response.data == null) {
+
+        console.log("CREATE INFO CHAT");
+      
+
+        //CREA LA INFORMACIÓN DE LA CONVERZACIÓN
+
+        createInfoChat();
+      } else {
+
+        console.log("CREATE INFO CHAT2");
+        var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
+
+        //  var recipientId = body.recipient_id;
+        // var messageId = body.message_id;
+
+        var obj = JSON.parse(jsonData);
+
+        var listJson = json2array(obj);
+
+        let dataItemSelected = [];
+
+        //VALIDA LOS MENSAJES INFORMATIVOS
+        for (var i = 0; i < json2array(obj).length; i++) {
+          var dataItem = json2array(obj)[i];
+
+          if (dataItem["information"] != true) {
+            dataItemSelected.push(dataItem);
+          }
+        }
+
+        // GENERA LA POSICION DE LAS 2 ULTIMAS
+        var position = dataItemSelected.length - 2; //changed1
+
+        var route = dataItemSelected[position]["routeStep"];
+        console.error("LA RUTA EN EL INICIO DE LA APP1: " + route);
+        if(route == "route"){
+
+        route = dataItemSelected[dataItemSelected.length - 1]["routeStep"];
+
+        }
+
+        console.error("LA RUTA EN EL INICIO DE LA APP2: " + route);
+        var type = dataItemSelected[dataItemSelected.length - 1]["type"];
+
+        console.error("EL TIPO DE MENSAJE EN EL INICIO DE LA APP: " + type);
+
+        if (
+          type == "multiple" ||
+          type == "answer" ||
+          type == "form" ||
+          type == "end" ||
+          type == "terms"
+        ) {
+          repeatMessageOption = true;
+        }
+
+        validationMsj(route);
+      }
+    })
+    .catch((error) => {
+      console.log(error); // Manejo de errores
+    });
+
+     }
      try {
      var  response = await axios.get( "https://getdev-b2c0b.firebaseio.com/company/sly/chatMessage/whatsapp/.json");
       console.log(response.data); // Muestra los datos obtenidos
@@ -1060,6 +1140,7 @@ async function callSendAPI(messageData) {
       console.log("Datos en formato JSONprincipal:", jsonData);
     //  console.log("Datos en formato JSONprincipal:", response.data);
       idChat = jsonData.replace('"', '').replace('"', '');
+      executeInit();
 
       console.log("Datos en formato JSONprincipal68: "+ idChat);
     } catch (error) {
@@ -1069,79 +1150,6 @@ async function callSendAPI(messageData) {
     
 
    
-
-    axios
-      .get(
-        "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/" +
-          recipientId +
-          "/.json"
-      )
-      .then((response) => {
-        //CONSULTA LOS MENSAJES DEL USUARIO
-
-        if (response.data == null) {
-
-          console.log("CREATE INFO CHAT");
-        
-
-          //CREA LA INFORMACIÓN DE LA CONVERZACIÓN
-
-          createInfoChat();
-        } else {
-
-          console.log("CREATE INFO CHAT2");
-          var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
-
-          //  var recipientId = body.recipient_id;
-          // var messageId = body.message_id;
-
-          var obj = JSON.parse(jsonData);
-
-          var listJson = json2array(obj);
-
-          let dataItemSelected = [];
-
-          //VALIDA LOS MENSAJES INFORMATIVOS
-          for (var i = 0; i < json2array(obj).length; i++) {
-            var dataItem = json2array(obj)[i];
-
-            if (dataItem["information"] != true) {
-              dataItemSelected.push(dataItem);
-            }
-          }
-
-          // GENERA LA POSICION DE LAS 2 ULTIMAS
-          var position = dataItemSelected.length - 2; //changed1
-
-          var route = dataItemSelected[position]["routeStep"];
-          console.error("LA RUTA EN EL INICIO DE LA APP1: " + route);
-          if(route == "route"){
-
-          route = dataItemSelected[dataItemSelected.length - 1]["routeStep"];
-
-          }
-
-          console.error("LA RUTA EN EL INICIO DE LA APP2: " + route);
-          var type = dataItemSelected[dataItemSelected.length - 1]["type"];
-
-          console.error("EL TIPO DE MENSAJE EN EL INICIO DE LA APP: " + type);
-
-          if (
-            type == "multiple" ||
-            type == "answer" ||
-            type == "form" ||
-            type == "end" ||
-            type == "terms"
-          ) {
-            repeatMessageOption = true;
-          }
-
-          validationMsj(route);
-        }
-      })
-      .catch((error) => {
-        console.log(error); // Manejo de errores
-      });
 
     // send a reply message as per the docs here https://developers.facebook.com/docs/whatsapp/cloud-api/reference/messages
 
