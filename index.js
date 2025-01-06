@@ -1038,7 +1038,6 @@ function repeatChat() {
 
       console.log("Successfully firebase" + response.data);
       sendMsj(title, route, type, true);
-      oneChat = true;
 
       validationMsj(route);
     });
