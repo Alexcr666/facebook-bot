@@ -121,7 +121,7 @@ app.post("/webhook", async function (req, res) {
 
 
 
-
+   
 
 
     // Iterate over each entry - there may be multiple if batched
@@ -134,6 +134,9 @@ app.post("/webhook", async function (req, res) {
         if (event.message) {
           receivedMessage(event);
         } else if (event.postback) {
+
+          const payload = event.postback.payload;
+          console.log("selector23: "+payload);
           receivedPostback(event);
         } else {
           console.log("Webhook received unknown event: ", event);
