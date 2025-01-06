@@ -22,6 +22,10 @@ var recipientId = "8370375226358762";
 
 var repeatMessageOption = false;
 
+function capitalize(str) {
+  if (!str) return ""; // Maneja cadenas vacías
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+}
 function savedAlertAgentData() {
   var dataForm = {
     agent: true,
