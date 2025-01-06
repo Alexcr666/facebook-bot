@@ -1135,7 +1135,7 @@ function repeatChat() {
       var route = dataItemSelected["id"];
    //   var type = dataItemSelected["type"];
 
-      console.error("body2: " + title);
+    //  console.error("body2: " + title);
 
     
     //  sendMsj(title, route, type, false);
