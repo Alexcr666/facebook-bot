@@ -150,7 +150,7 @@ var messageGlobal;
 // Incoming events handling
 function receivedMessage(event) {
   var senderID = event.sender.id;
-  //var recipientID = event.recipient.id;
+  var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
@@ -192,7 +192,7 @@ function receivedMessage(event) {
 
 function receivedPostback(event) {
   var senderID = event.sender.id;
-  //var recipientID = event.recipient.id;
+var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
 
   // The 'payload' param is a developer-defined field which is set in a postback
@@ -774,7 +774,7 @@ async function sendMsj(
     },
     function (error, response, body) {
       if (!error && response.statusCode == 200) {
-     //   var recipientId = body.recipient_id;
+       var recipientId = body.recipient_id;
         var messageId = body.message_id;
 
         console.log(
@@ -1012,7 +1012,7 @@ function repeatChat() {
       var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
       console.log("Datos en formato JSON:", jsonData);
 
-      //  var recipientId = body.recipient_id;
+       var recipientId = body.recipient_id;
       // var messageId = body.message_id;
 
       var obj = JSON.parse(jsonData);
@@ -1082,7 +1082,7 @@ async function callSendAPI(messageData) {
           console.log("CREATE INFO CHAT2");
           var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
 
-          //  var recipientId = body.recipient_id;
+          var recipientId = body.recipient_id;
           // var messageId = body.message_id;
 
           var obj = JSON.parse(jsonData);
