@@ -19,7 +19,7 @@ let app = express();
 var idChat = "";
 var recipientId = "8370375226358762";
 var opcionesMultiple  = [];
-var opcionesMultipleValue  = [];
+
 
 
 var repeatMessageOption = false;
@@ -137,20 +137,10 @@ app.post("/webhook", async function (req, res) {
           receivedMessage(event);
         } else if (event.postback) {
 
-          function obtenerNumeroDeString(texto) {
-            // Buscar un patrón de número después de la palabra clave
-            const regex = /PAYLOAD_OPCION(\d+)/;
-            const match = texto.match(regex);
           
-            // Si hay un número, convertirlo a entero, si no, retornar null
-            return match ? parseInt(match[1], 10) : null;
-          }
-
           const payload = event.postback.payload;
-          console.log("selector23text: "+payload);
-          console.log("selector23: "+obtenerNumeroDeString(payload));
-          var position = (obtenerNumeroDeString(payload)-1);
-       messageGlobal =    opcionesMultipleValue [position];
+          
+       messageGlobal =    payload;
        console.log("mensaje34: "+messageGlobal);
   
           receivedPostback(event);
@@ -441,7 +431,8 @@ async function sendMultipleButtonTemplates() {
     const buttons = grupo.map(opcion => ({
       type: "postback",
       title: opcion,
-      payload: `PAYLOAD_${opcion.replace(/\s+/g, "_").toUpperCase()}`
+      payload: opcion,
+     // payload: `PAYLOAD_${opcion.replace(/\s+/g, "_").toUpperCase()}`
     }));
 
     const payload = {
@@ -585,7 +576,7 @@ function validationMsj(value) {
 
               var listString = "";
               opcionesMultiple = list;
-              opcionesMultipleValue = list;
+        
 
               for (var i = 0; i < list.length; i++) {
                 console.log("longitud2: " + list[i]);
