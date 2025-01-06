@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 const request = require("request");
 const path = require("path");
 const axios = require("axios");
+const { log } = require("console");
 
 var messengerButton =
   '<html><head><title>Facebook Messenger Bot</title></head><body><h1>Facebook Messenger Bot</h1>This is a bot based on Messenger Platform QuickStart. For more details, see their <a href="https://developers.facebook.com/docs/messenger-platform/guides/quick-start">docs</a>.<script src="https://button.glitch.me/button.js" data-style="glitch"></script><div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div></body></html>';
@@ -1150,11 +1151,16 @@ async function triggersFun(){
     // Verificar si hay datos disponibles
     if (response.data) {
       const dataTriggersChat = response.data;
-
+      console.log("consumir triggers: "+dataTriggersChat);
       // Iterar sobre los hijos del nodo "triggers"
       Object.keys(dataTriggersChat).forEach((key) => {
         const dataEvent = dataTriggersChat[key];
         const description = dataEvent.description;
+
+        console.log("triggers1: "+dataEvent.event);
+        
+
+        
 
         if (dataEvent.event === "Inactivo por 30 segundos") {
           initTimeFun(description);
