@@ -1090,7 +1090,7 @@ async function callSendAPI(messageData) {
           console.log("CREATE INFO CHAT2");
           var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
 
-          var recipientId = body.recipient_id;
+        //  var recipientId = body.recipient_id;
           // var messageId = body.message_id;
 
           var obj = JSON.parse(jsonData);
