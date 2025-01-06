@@ -109,7 +109,7 @@ app.post("/webhook", async function (req, res) {
 
   // Make sure this is a page subscription
   if (data.object === "page") {
-    createInfoChat();
+   // createInfoChat();
 
     // Muestra los datos obtenidos
 
@@ -986,6 +986,7 @@ function  createInfoChat(){
       messageData2
     )
     .then((response) => {
+      repeatChat();
       //repeatChat();
       //INICIA EL CHAT
     });
@@ -1076,12 +1077,16 @@ async function callSendAPI(messageData) {
         //CONSULTA LOS MENSAJES DEL USUARIO
 
         if (response.data == null) {
+
+          console.log("CREATE INFO CHAT");
         
 
           //CREA LA INFORMACIÓN DE LA CONVERZACIÓN
 
           createInfoChat();
         } else {
+
+          console.log("CREATE INFO CHAT2");
           var jsonData = JSON.stringify(response.data, null, 2); // Convierte a JSON legible
 
           //  var recipientId = body.recipient_id;
