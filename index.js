@@ -603,6 +603,18 @@ function validationMsj(value) {
             }
           }
 
+          if (type == "email") {
+
+            sendMsj("Enviado email", route, type, true);
+
+
+            validationMsj(route);
+
+
+
+
+          }
+
           if (type == "form") {
             var listString =
               "Formulario de contacto" +
