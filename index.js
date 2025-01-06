@@ -618,7 +618,7 @@ function validationMsj(value) {
               "\n" +
               "2.Rechazar";
 
-              opcionesMultiple ["Aceptar","Rechazar"];
+              opcionesMultiple =  ["Aceptar","Rechazar"];
             if (repeatMessageOption == true) {
 
               console.error("VALIDA EL MENSAJE RESPUESTA POLITICAS: " + messageGlobal);
