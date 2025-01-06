@@ -308,7 +308,7 @@ async function sendMedia(title, media, url3) {
   try {
     var response = await axios.post(url, payload, {
       params: {
-        access_token: PAGE_ACCESS_TOKEN
+        access_token: process.env.PAGE_ACCESS_TOKEN
       },
       headers: {
         "Content-Type": "application/json",
@@ -330,7 +330,8 @@ async function sendLink(urlData) {
 
   var payload = {
     recipient: {
-      id: USER_ID,
+      id: recipientId,
+      
     },
     message: {
       attachment: {
@@ -351,7 +352,7 @@ async function sendLink(urlData) {
   try {
     var response = await axios.post(url, payload, {
       params: {
-        access_token: PAGE_ACCESS_TOKEN
+        access_token: process.env.PAGE_ACCESS_TOKEN
       },
       headers: {
         "Content-Type": "application/json",
