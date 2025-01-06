@@ -19,6 +19,7 @@ let app = express();
 var idChat = "";
 var recipientId = "8370375226358762";
 var opcionesMultiple  = [];
+var opcionesMultipleValue  = [];
 
 
 var repeatMessageOption = false;
@@ -131,12 +132,25 @@ app.post("/webhook", async function (req, res) {
 
       // Iterate over each messaging event
       entry.messaging.forEach(function (event) {
+
         if (event.message) {
           receivedMessage(event);
         } else if (event.postback) {
 
+          function obtenerNumeroDeString(texto) {
+            // Buscar un patrón de número después de la palabra clave
+            const regex = /PAYLOAD_OPCION(\d+)/;
+            const match = texto.match(regex);
+          
+            // Si hay un número, convertirlo a entero, si no, retornar null
+            return match ? parseInt(match[1], 10) : null;
+          }
+
           const payload = event.postback.payload;
-          console.log("selector23: "+payload);
+          console.log("selector23: "+obtenerNumeroDeString(payload));
+          var position = (obtenerNumeroDeString(payload)-1);
+       messageGlobal =    opcionesMultipleValue [position];
+  
           receivedPostback(event);
         } else {
           console.log("Webhook received unknown event: ", event);
@@ -569,6 +583,7 @@ function validationMsj(value) {
 
               var listString = "";
               opcionesMultiple = list;
+              opcionesMultipleValue = list;
 
               for (var i = 0; i < list.length; i++) {
                 console.log("longitud2: " + list[i]);
