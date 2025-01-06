@@ -18,6 +18,7 @@ let app = express();
 
 var idChat = "";
 var recipientId = "8370375226358762";
+var opcionesMultiple ;
 
 
 var repeatMessageOption = false;
@@ -408,13 +409,13 @@ async function sendMediaVideo(title, urlData, data) {
 }
 
 async function sendMultipleButtonTemplates() {
-  const opciones = ["Opción 1", "Opción 2", "Opción 3", "Opción 4", "Opción 5", "Opción 6"];
+ // const opciones = ["Opción 1", "Opción 2", "Opción 3", "Opción 4", "Opción 5", "Opción 6"];
   const url = `https://graph.facebook.com/v18.0/me/messages`;
 
   // Dividir las opciones en grupos de 3 botones
   const grupos = [];
-  for (let i = 0; i < opciones.length; i += 3) {
-    grupos.push(opciones.slice(i, i + 3));
+  for (let i = 0; i < opcionesMultiple.length; i += 3) {
+    grupos.push(opcionesMultiple.slice(i, i + 3));
   }
 
   for (const grupo of grupos) {
@@ -444,6 +445,7 @@ async function sendMultipleButtonTemplates() {
         headers: { "Content-Type": "application/json" }
       });
       console.log("Botones enviados exitosamente:", response.data);
+      opcionesMultiple = [];
     } catch (error) {
       console.error("Error al enviar botones:", error.response?.data || error.message);
     }
@@ -497,7 +499,7 @@ function validationMsj(value) {
           
           }
           if (type == "multiple") {
-            sendMultipleButtonTemplates();
+          //  sendMultipleButtonTemplates();
             if (repeatMessageOption == true) {
               repeatMessageOption = false;
               var keys = Object.keys(dataItemSelected["optionsStep"]);
@@ -563,6 +565,7 @@ function validationMsj(value) {
               console.log("longitud: " + list[0]);
 
               var listString = "";
+              opcionesMultiple = list;
 
               for (var i = 0; i < list.length; i++) {
                 console.log("longitud2: " + list[i]);
@@ -895,7 +898,7 @@ async function sendMsj(
   // if (notification == true) {
   console.error("----MENSAJE ENVIADO---" + messageText);
 
-
+if(opcionesMultiple.length ==0){
   var messageData = {
     recipient: {
       id: recipientId,
@@ -929,6 +932,9 @@ async function sendMsj(
       }
     }
   );
+}else{
+  sendMultipleButtonTemplates();
+}
   // mark incoming message as read
   /* await axios({
       method: "POST",
