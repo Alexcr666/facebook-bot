@@ -1446,9 +1446,9 @@ async function callSendAPI(messageData) {
     console.log("Datos en formato JSONprincipal:", jsonData);
     //  console.log("Datos en formato JSONprincipal:", response.data);
     idChat = jsonData.replace('"', '').replace('"', '');
-    sendMsjNoNotification(messageGlobal, "information", "chat", true);
+   // sendMsjNoNotification(messageGlobal, "information", "chat", true);
     executeInit();
-    triggersFun();
+   // triggersFun();
 
     console.log("Datos en formato JSONprincipal68: " + idChat);
   } catch (error) {
