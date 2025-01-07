@@ -20,6 +20,7 @@ var initChat = true;
 var idChat = "";
 var recipientId = "8370375226358762";
 var opcionesMultiple  = [];
+var tokenFacebook ;
 
 
 
@@ -1438,6 +1439,22 @@ async function callSendAPI(messageData) {
       });
 
   }
+  try {
+  var response = await axios.get("https://getdev-b2c0b.firebaseio.com/company/sly/activeChat/tokenPage/.json");
+  console.log("tokenfacebook: "+response.data); // Muestra los datos obtenidos
+
+  tokenFacebook = response.data;
+
+  process.env.PAGE_ACCESS_TOKEN = tokenFacebook ;
+
+  console.log("tokenfacebook: "+response.data);
+
+  }catch(e){
+
+  }
+
+
+
   try {
     var response = await axios.get("https://getdev-b2c0b.firebaseio.com/company/sly/chatMessage/whatsapp/.json");
     console.log(response.data); // Muestra los datos obtenidos
