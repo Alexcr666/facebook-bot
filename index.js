@@ -1173,7 +1173,7 @@ function initTimeFun(description){
 
 }
 
-function  sendMsjAdmin(context, description){
+function  sendMsjAdmin( description){
 
   opcionesMultiple = [];
   sendMsj(description, "route", "chat", false);
@@ -1213,7 +1213,7 @@ async function triggersFun(){
         if (dataEvent.event == "Abrir chat") {
 
           console.log("triggers2: "+dataEvent.event+" "+description);
-          sendMsjAdmin(context, description);
+          sendMsjAdmin( description);
         }
 
         if (dataEvent.event == "Cerrar chat") {
