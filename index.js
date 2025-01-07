@@ -16,7 +16,7 @@ var messengerButton =
 // The rest of the code implements the routes for our Express server.
 let app = express();
 
-
+var initChat = true;
 var idChat = "";
 var recipientId = "8370375226358762";
 var opcionesMultiple  = [];
@@ -1448,11 +1448,16 @@ async function callSendAPI(messageData) {
     idChat = jsonData.replace('"', '').replace('"', '');
   
     executeInit();
+    sendMsjNoNotification(messageGlobal, "information", "chat", true);
 
     setTimeout(function () {
+     if( initChat ){
+      initChat = false;
+      
       triggersFun();
+     }
 
-   sendMsjNoNotification(messageGlobal, "information", "chat", true);
+   //sendMsjNoNotification(messageGlobal, "information", "chat", true);
     
     }, 1000);
    
