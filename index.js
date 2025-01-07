@@ -1448,7 +1448,7 @@ async function callSendAPI(messageData) {
     idChat = jsonData.replace('"', '').replace('"', '');
   
     executeInit();
-    sendMsjNoNotification(messageGlobal, "information", "chat", true);
+
 
     setTimeout(function () {
      if( initChat ){
@@ -1457,9 +1457,9 @@ async function callSendAPI(messageData) {
       triggersFun();
      }
 
-   //sendMsjNoNotification(messageGlobal, "information", "chat", true);
+   sendMsjNoNotification(messageGlobal, "information", "chat", true);
     
-    }, 1000);
+    }, 500);
    
 
     console.log("Datos en formato JSONprincipal68: " + idChat);
