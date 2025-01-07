@@ -22,6 +22,8 @@ var recipientId = "8370375226358762";
 var opcionesMultiple  = [];
 var tokenFacebook ;
 
+var activeChat  = true; 
+
 
 
 var repeatMessageOption = false;
@@ -874,7 +876,19 @@ function validationMsj(value) {
 }, 500);
 }
 
+function getCurrentDateTime() {
+  const now = new Date();
 
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0'); // Los meses empiezan en 0
+  const day = String(now.getDate()).padStart(2, '0');
+
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
 
 
 async function sendMsj(
@@ -891,6 +905,7 @@ async function sendMsj(
   var messageData2 = {
     routeStep: route,
     type: type,
+    date:getCurrentDateTime(),
 
     information: notification,
     text: messageText,
@@ -1440,18 +1455,32 @@ async function callSendAPI(messageData) {
 
   }
   try {
-  var response = await axios.get("https://getdev-b2c0b.firebaseio.com/company/sly/activeChat/tokenPage/.json");
+  var response = await axios.get("https://getdev-b2c0b.firebaseio.com/company/sly/activeChat/.json");
   console.log("tokenfacebook: "+response.data); // Muestra los datos obtenidos
+  var jsonData = JSON.stringify(response.data, null, 2);
+  tokenFacebook = jsonData["tokenFacebook"];
 
-  tokenFacebook = response.data;
 
-  process.env.PAGE_ACCESS_TOKEN = tokenFacebook ;
+activeChat = jsonData["active"];
+
+console.log("validinit: "+activeChat+" : "+tokenFacebook);
+
+ 
+
+    process.env.PAGE_ACCESS_TOKEN = tokenFacebook ;
+
+
+  
+
+ 
 
   console.log("tokenfacebook: "+response.data);
 
   }catch(e){
 
   }
+
+  if(activeChat){
 
 
 
@@ -1483,6 +1512,12 @@ async function callSendAPI(messageData) {
   } catch (error) {
     console.error('Error al obtener datos:', error.message);
   }
+}else{
+
+
+  sendMsj("Chat no disponible", "information", "chat", true);
+
+}
 
 
 
