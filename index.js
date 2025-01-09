@@ -70,6 +70,7 @@ function savedForm(city, company, consult, email, name, phone) {
     email: email,
     name: name,
     phone: phone,
+    date:getCurrentDateTime(),
   };
   axios
     .post(
@@ -777,6 +778,17 @@ function validationMsj(value) {
 
                 if (messageGlobal == "Ir al inicio") {
                   repeatMessageOption = false;
+
+                  for (var i = 0; i < closeTriggers.length; i++) {
+
+               var value = closeTriggers[i];
+
+               sendMsjAdmin( value);
+
+
+                  }
+
+                
                   repeatChat();
                 } else {
                   if (messageGlobal == "Contactar a un acesor") {
@@ -851,6 +863,16 @@ function validationMsj(value) {
             validationMsj(route);
 
             sendMsj(message, route, type, false);
+
+
+            for (var i = 0; i < openProductTriggers.length; i++) {
+
+              var value = openProductTriggers[i];
+
+              sendMsjAdmin( value);
+
+
+                 }
           }
 
           if (type == "link") {
@@ -1458,10 +1480,12 @@ async function callSendAPI(messageData) {
   var response = await axios.get("https://getdev-b2c0b.firebaseio.com/company/sly/activeChat/.json");
   console.log("tokenfacebook: "+response.data); // Muestra los datos obtenidos
   var jsonData = JSON.stringify(response.data, null, 2);
-  tokenFacebook = jsonData["tokenFacebook"];
+
+  var dataItemSelected = JSON.parse(jsonData);
+  tokenFacebook = dataItemSelected ["tokenFacebook"];
 
 
-activeChat = jsonData["active"];
+activeChat = dataItemSelected ["active"];
 
 console.log("validinit: "+activeChat+" : "+tokenFacebook);
 
