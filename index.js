@@ -126,7 +126,36 @@ app.post("/webhook", async function (req, res) {
     // Muestra los datos obtenidos
 
 
-
+    try {
+      const entries = req.body.entry;
+      entries.forEach((entry) => {
+        const messagingEvents = entry.messaging;
+        messagingEvents.forEach((event) => {
+          // Verificar si el evento contiene un mensaje enviado por el usuario
+          if (event.message && !event.message.is_echo) {
+            const senderId = event.sender.id; // ID del usuario que envió el mensaje
+            const text = event.message.text; // Texto del mensaje enviado por el usuario
+  
+            console.log(`Mensaje recibido de ${senderId}: ${text}`);
+  
+            // Crea el payload para responder
+            const messageData = {
+              recipient: { id: senderId },
+              message: { text: `Recibí tu mensaje: "${text}"` },
+            };
+  
+            // Llama a callSendAPI para enviar una respuesta
+           // callSendAPI(messageData);
+          }
+        });
+      });
+  
+      // Responder a Facebook con un 200 OK
+      res.sendStatus(200);
+    } catch (error) {
+      console.error("Error al procesar el webhook:", error.message);
+      res.sendStatus(500);
+    }
    
 
 
@@ -143,14 +172,14 @@ app.post("/webhook", async function (req, res) {
         } else if (event.postback) {
 
           
-          const payload = event.postback.payload;
+         /* const payload = event.postback.payload;
           
        messageGlobal =    payload;
 
 
-       console.log("mensaje34: "+messageGlobal);
+       console.log("mensaje34: "+messageGlobal);*/
   
-          receivedPostback(event);
+        // receivedPostback(event);
         } else {
           console.log("Webhook received unknown event: ", event);
         }
