@@ -17,6 +17,7 @@ var messengerButton =
 let app = express();
 
 var initChat = true;
+var initChatMsj = true;
 var idChat = "";
 var recipientId = "8370375226358762";
 var opcionesMultiple  = [];
@@ -137,12 +138,16 @@ app.post("/webhook", async function (req, res) {
             const text = event.message.text; // Texto del mensaje enviado por el usuario
   
             console.log(`Mensaje recibido de ${senderId}: ${text}`);
+
+            initChatMsj = true;
   
             // Crea el payload para responder
-            const messageData = {
+          /*  const messageData = {
               recipient: { id: senderId },
               message: { text: `Recibí tu mensaje: "${text}"` },
-            };
+            };*/
+
+
   
             // Llama a callSendAPI para enviar una respuesta
            // callSendAPI(messageData);
@@ -172,14 +177,14 @@ app.post("/webhook", async function (req, res) {
         } else if (event.postback) {
 
           
-         /* const payload = event.postback.payload;
+          const payload = event.postback.payload;
           
        messageGlobal =    payload;
 
 
-       console.log("mensaje34: "+messageGlobal);*/
+       console.log("mensaje34: "+messageGlobal);
   
-        // receivedPostback(event);
+          receivedPostback(event);
         } else {
           console.log("Webhook received unknown event: ", event);
         }
@@ -1536,7 +1541,8 @@ console.log("validinit: "+activeChat+" : "+tokenFacebook);
   }
 
   if(activeChat){
-if( messageGlobal != ""){
+if( initChatMsj ){
+  initChatMsj = false;
     executeInit();
 }
 
