@@ -1567,11 +1567,7 @@ console.log("validinit: "+activeChat+" : "+tokenFacebook);
   }
 
   if(activeChat){
-   if( initChatMsj){
-
-    initChatMsj = false;
-    executeInit();
-   }
+   
 
 
 
@@ -1585,7 +1581,11 @@ console.log("validinit: "+activeChat+" : "+tokenFacebook);
     idChat = jsonData.replace('"', '').replace('"', '');
   
 
+    if( initChatMsj){
 
+      initChatMsj = false;
+      executeInit();
+     }
 
     setTimeout(function () {
      if( initChat ){
