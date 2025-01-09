@@ -485,8 +485,6 @@ function validationMsj(value) {
     "/options/" +
     value +
     "/.json");
-
-
   if (value != null) {
     axios
       .get(
@@ -520,13 +518,10 @@ function validationMsj(value) {
           if (type == "multiple") {
           //  sendMultipleButtonTemplates();
             if (repeatMessageOption == true) {
-
-            if(messageGlobal != ""){
-            
+              repeatMessageOption = false;
               var keys = Object.keys(dataItemSelected["optionsStep"]);
               var position = 0;
               var success = false;
-              var routeMultiple;
 
               keys.forEach(function (key) {
                 console.log("datos: " + key);
@@ -535,7 +530,6 @@ function validationMsj(value) {
                 console.log("global: " + messageGlobal.toLowerCase());
 
                 if (key.toLowerCase() == messageGlobal.toLowerCase()) {
-                  repeatMessageOption = false;
                   success = true;
                   var list2 = dataItemSelected["optionsStep"];
 
@@ -544,7 +538,7 @@ function validationMsj(value) {
 
                   var positionFinal = position - 1;
                   console.error("SELECCIONADO DE MULTIPLE: " + positionFinal);
-               routeMultiple = listProm[positionFinal];
+                  var routeMultiple = listProm[positionFinal];
                   console.error("RUTA SELECCIONADA MULTIPLE: " + routeMultiple);
                   var newData = {
                     routeStep: routeMultiple,
@@ -565,28 +559,19 @@ function validationMsj(value) {
 
                     });*/
 
-                
+                  validationMsj(routeMultiple);
                 }
               });
 
-              
-
-             if (success == false) {
-             /*   sendMsj(
+              if (success == false) {
+                sendMsj(
                   "No reconocemos esta opción",
-                  "route",
-                  "information",
+                  route,
+                  type,
                   true
-                );*/
-
-              }else{
-
-                kkk
-
-                validationMsj(routeMultiple);
+                );
 
               }
-            }
             } else {
               console.error("DATOS SELECTED1------: " + route);
 
@@ -615,7 +600,6 @@ function validationMsj(value) {
               //poder
 
               repeatMessageOption = true;
-              messageGlobal = "";
    sendMsj(message, "route", "multiple", false);
              /* if (route == undefined) {
             
