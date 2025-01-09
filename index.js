@@ -518,7 +518,9 @@ function validationMsj(value) {
           if (type == "multiple") {
           //  sendMultipleButtonTemplates();
             if (repeatMessageOption == true) {
-              repeatMessageOption = false;
+
+            if(messageGlobal != ""){
+            //  repeatMessageOption = false;
               var keys = Object.keys(dataItemSelected["optionsStep"]);
               var position = 0;
               var success = false;
@@ -567,18 +569,19 @@ function validationMsj(value) {
               
 
              if (success == false) {
-                sendMsj(
+             /*   sendMsj(
                   "No reconocemos esta opción",
                   "route",
                   "information",
                   true
-                );
+                );*/
 
               }else{
 
                 validationMsj(routeMultiple);
 
               }
+            }
             } else {
               console.error("DATOS SELECTED1------: " + route);
 
@@ -607,6 +610,7 @@ function validationMsj(value) {
               //poder
 
               repeatMessageOption = true;
+              messageGlobal = "";
    sendMsj(message, "route", "multiple", false);
              /* if (route == undefined) {
             
