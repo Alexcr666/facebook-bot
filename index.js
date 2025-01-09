@@ -181,14 +181,14 @@ try{
           //console.log(`Payload recibido: ${payload}`);
 
           // Llamar a callSendAPI para responder al usuario
-          callSendAPI(senderId, `Has seleccionado: ${buttonTitle}`);
+        //  callSendAPI(senderId, `Has seleccionado: ${buttonTitle}`);
         }
       });
     });
 
   } catch (error) {
     console.error("Error al procesar el webhook:", error.message);
-    res.sendStatus(500);
+   // res.sendStatus(500);
   }
 
     
