@@ -172,7 +172,9 @@ try{
 
           console.log(`Usuario ${senderId} hizo clic en el botón: ${buttonTitle}`);
           console.log(`Payload recibido: ${payload}`);
+          messageGlobal = event.postback.payload;
 
+     initChatMsj = true;
           // Llamar a callSendAPI para responder al usuario
        //   callSendAPI(senderId, `Has seleccionado: ${buttonTitle}`);
         }
