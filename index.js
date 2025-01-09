@@ -485,6 +485,8 @@ function validationMsj(value) {
     "/options/" +
     value +
     "/.json");
+
+
   if (value != null) {
     axios
       .get(
@@ -520,7 +522,7 @@ function validationMsj(value) {
             if (repeatMessageOption == true) {
 
             if(messageGlobal != ""){
-            //  repeatMessageOption = false;
+            
               var keys = Object.keys(dataItemSelected["optionsStep"]);
               var position = 0;
               var success = false;
@@ -533,6 +535,7 @@ function validationMsj(value) {
                 console.log("global: " + messageGlobal.toLowerCase());
 
                 if (key.toLowerCase() == messageGlobal.toLowerCase()) {
+                  repeatMessageOption = false;
                   success = true;
                   var list2 = dataItemSelected["optionsStep"];
 
@@ -577,6 +580,8 @@ function validationMsj(value) {
                 );*/
 
               }else{
+
+                kkk
 
                 validationMsj(routeMultiple);
 
@@ -1528,12 +1533,13 @@ console.log("validinit: "+activeChat+" : "+tokenFacebook);
     //  console.log("Datos en formato JSONprincipal:", response.data);
     idChat = jsonData.replace('"', '').replace('"', '');
   
-    executeInit();
+   
 
 
     setTimeout(function () {
      if( initChat ){
       initChat = false;
+      executeInit();
       
    //   triggersFun();
      }
