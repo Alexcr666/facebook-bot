@@ -522,6 +522,7 @@ function validationMsj(value) {
               var keys = Object.keys(dataItemSelected["optionsStep"]);
               var position = 0;
               var success = false;
+              var routeMultiple;
 
               keys.forEach(function (key) {
                 console.log("datos: " + key);
@@ -538,7 +539,7 @@ function validationMsj(value) {
 
                   var positionFinal = position - 1;
                   console.error("SELECCIONADO DE MULTIPLE: " + positionFinal);
-                  var routeMultiple = listProm[positionFinal];
+               routeMultiple = listProm[positionFinal];
                   console.error("RUTA SELECCIONADA MULTIPLE: " + routeMultiple);
                   var newData = {
                     routeStep: routeMultiple,
@@ -559,11 +560,13 @@ function validationMsj(value) {
 
                     });*/
 
-                  validationMsj(routeMultiple);
+                
                 }
               });
 
-             /* if (success == false) {
+              
+
+              if (success == false) {
                 sendMsj(
                   "No reconocemos esta opción",
                   route,
@@ -571,7 +574,11 @@ function validationMsj(value) {
                   true
                 );
 
-              }*/
+              }else{
+
+                validationMsj(routeMultiple);
+
+              }
             } else {
               console.error("DATOS SELECTED1------: " + route);
 
