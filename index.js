@@ -15,9 +15,8 @@ var messengerButton =
 
 // The rest of the code implements the routes for our Express server.
 let app = express();
-
-var initChat = true;
 var initChatMsj = true;
+var initChat = true;
 var idChat = "";
 var recipientId = "8370375226358762";
 var opcionesMultiple  = [];
@@ -126,7 +125,6 @@ app.post("/webhook", async function (req, res) {
 
     // Muestra los datos obtenidos
 
-
     try {
       const entries = req.body.entry;
       entries.forEach((entry) => {
@@ -156,11 +154,12 @@ app.post("/webhook", async function (req, res) {
       });
   
       // Responder a Facebook con un 200 OK
-      res.sendStatus(200);
+    //  res.sendStatus(200);
     } catch (error) {
       console.error("Error al procesar el webhook:", error.message);
       res.sendStatus(500);
     }
+
    
 
 
@@ -607,7 +606,7 @@ function validationMsj(value) {
 
               }
             } else {
-              messageGlobal = "";
+              messageGlobal = ""
               console.error("DATOS SELECTED1------: " + route);
 
               var list2 = dataItemSelected["optionsMulti"];
@@ -1415,7 +1414,7 @@ async function callSendAPI(messageData) {
   console.log("message" + messageData);
 
   console.log("createinfochat");
-  
+
 
 
 
@@ -1541,10 +1540,11 @@ console.log("validinit: "+activeChat+" : "+tokenFacebook);
   }
 
   if(activeChat){
-if( initChatMsj ){
-  initChatMsj = false;
+   if( initChatMsj){
+
+    initChatMsj = false;
     executeInit();
-}
+   }
 
 
 
