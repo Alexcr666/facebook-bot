@@ -1524,7 +1524,7 @@ console.log("validinit: "+activeChat+" : "+tokenFacebook);
      if( initChat ){
       initChat = false;
       
-     // triggersFun();
+      triggersFun();
      }
 
   // sendMsjNoNotification(messageGlobal, "information", "chat", true);
