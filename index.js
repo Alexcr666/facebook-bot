@@ -159,6 +159,30 @@ app.post("/webhook", async function (req, res) {
       console.error("Error al procesar el webhook:", error.message);
       res.sendStatus(500);
     }
+try{
+    body.entry.forEach((entry) => {
+      const messagingEvents = entry.messaging;
+
+      messagingEvents.forEach((event) => {
+        // Detectar postbacks de botones interactivos
+        if (event.postback) {
+          const senderId = event.sender.id; // ID del usuario que hizo clic
+          const buttonTitle = event.postback.title; // Título del botón clicado
+          const payload = event.postback.payload; // Payload del botón clicado
+
+          console.log(`Usuario ${senderId} hizo clic en el botón: ${buttonTitle}`);
+          console.log(`Payload recibido: ${payload}`);
+
+          // Llamar a callSendAPI para responder al usuario
+       //   callSendAPI(senderId, `Has seleccionado: ${buttonTitle}`);
+        }
+      });
+    });
+
+  } catch (error) {
+    console.error("Error al procesar el webhook:", error.message);
+  //  res.sendStatus(500);
+  }
 
    
 
@@ -189,6 +213,9 @@ app.post("/webhook", async function (req, res) {
         }
       });
     });
+
+
+    
 
     // Assume all went well.
     //
@@ -1373,7 +1400,7 @@ function repeatChat() {
 
       var obj = JSON.parse(jsonData);
 
-      var listJson = json2array(obj);
+     // var listJson = json2array(obj);
       console.log(
         "lenghtoptionsinit : " +
         json2array(obj).length +
