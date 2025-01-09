@@ -573,6 +573,7 @@ function validationMsj(value) {
 
               }
             } else {
+              messageGlobal = "";
               console.error("DATOS SELECTED1------: " + route);
 
               var list2 = dataItemSelected["optionsMulti"];
@@ -1380,6 +1381,7 @@ async function callSendAPI(messageData) {
   console.log("message" + messageData);
 
   console.log("createinfochat");
+  
 
 
 
@@ -1505,6 +1507,9 @@ console.log("validinit: "+activeChat+" : "+tokenFacebook);
   }
 
   if(activeChat){
+if( messageGlobal != ""){
+    executeInit();
+}
 
 
 
@@ -1517,13 +1522,12 @@ console.log("validinit: "+activeChat+" : "+tokenFacebook);
     //  console.log("Datos en formato JSONprincipal:", response.data);
     idChat = jsonData.replace('"', '').replace('"', '');
   
-   
+
 
 
     setTimeout(function () {
      if( initChat ){
       initChat = false;
-      executeInit();
       
    //   triggersFun();
      }
