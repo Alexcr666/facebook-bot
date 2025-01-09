@@ -566,11 +566,11 @@ function validationMsj(value) {
 
               
 
-              if (success == false) {
+             if (success == false) {
                 sendMsj(
                   "No reconocemos esta opción",
-                  route,
-                  type,
+                  "route",
+                  "information",
                   true
                 );
 
