@@ -1384,7 +1384,7 @@ function createInfoChat() {
 
 
 function repeatChat() {
-  console.log("VALIDANDO CREATE3");
+  console.log("VALIDANDO CREATE3"+idChat);
   axios
     .get(
       "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
@@ -1401,12 +1401,12 @@ function repeatChat() {
       var obj = JSON.parse(jsonData);
 
      // var listJson = json2array(obj);
-      console.log(
+    /*  console.log(
         "lenghtoptionsinit : " +
         json2array(obj).length +
         " : " +
         json2array(obj)[0]
-      );
+      );*/
 
       var dataItemSelected;
       for (var i = 0; i < json2array(obj).length; i++) {
