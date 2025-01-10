@@ -1546,7 +1546,7 @@ async function callSendAPI(messageData) {
   var jsonData = JSON.stringify(response.data, null, 2);
 
   var dataItemSelected = JSON.parse(jsonData);
-  tokenFacebook = dataItemSelected ["tokenFacebook"];
+  tokenFacebook = dataItemSelected ["tokenPage"];
 
 
 activeChat = dataItemSelected ["active"];
