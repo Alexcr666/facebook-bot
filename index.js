@@ -778,8 +778,7 @@ function validationMsj(value) {
           if (type == "email") {
 
             sendMsj("Enviado email", route, type, true);
-
-
+            var route = dataItemSelected["optionsStep"]["si"];
             validationMsj(route);
 
 
@@ -808,7 +807,7 @@ function validationMsj(value) {
 
 
            
-              let lista = messageGlobal.split(", ");
+              let lista = messageGlobal.split(",");
 
               console.error("GUARDANDO FORMULARIO "+lista.length );
 
