@@ -822,7 +822,9 @@ function validationMsj(value) {
           if (type == "agent") {
             savedAlertAgentData();
             sendMsj("Buscando agentes disponibles", route, type, true);
+          var route = dataItemSelected["optionsStep"]["si"];
             validationMsj(route);
+            
           }
 
           if (type == "end") {
