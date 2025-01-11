@@ -627,7 +627,7 @@ function validationMsj(value) {
                 }
               });
 
-              if (success == false) {
+              /*if (success == false) {
                 sendMsj(
                   "No reconocemos esta opción",
                   route,
@@ -635,7 +635,7 @@ function validationMsj(value) {
                   true
                 );
 
-              }
+              }*/
             } else {
               messageGlobal = ""
               console.error("DATOS SELECTED1------: " + route);
