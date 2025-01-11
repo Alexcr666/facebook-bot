@@ -807,10 +807,12 @@ function validationMsj(value) {
 
 
 
-              console.error("GUARDANDO FORMULARIO");
+           
               let lista = messageGlobal.split(", ");
 
-              if (lista.length == 4) {
+              console.error("GUARDANDO FORMULARIO "+lista.length );
+
+              if (lista.length >= 4) {
                 validationMsj(route);
 
                 var city = lista[0];
