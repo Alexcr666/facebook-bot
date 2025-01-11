@@ -205,7 +205,7 @@ try{
           const payload = event.postback.payload;
           
        messageGlobal =    payload;
-
+       initChatMsj = true;
 
        console.log("mensaje34: "+messageGlobal);
   
@@ -1594,7 +1594,7 @@ console.log("validinit: "+activeChat+" : "+tokenFacebook);
       initChat = false;
       
    //   triggersFun();
-     }
+    }
 
   // sendMsjNoNotification(messageGlobal, "information", "chat", true);
     
