@@ -15,6 +15,7 @@ var messengerButton =
 
 // The rest of the code implements the routes for our Express server.
 let app = express();
+var idMessageFinal = "";
 var initChatMsj = true;
 var initChat = true;
 var idChat = "";
@@ -607,19 +608,20 @@ function validationMsj(value) {
 
                   };
 
-                  console.log("VALIDANDO CREATE1-");
-                 /* axios
+                  console.log("VALIDANDO CREATE1-"+"https://getdev-b2c0b.firebaseio.com/company/sly/messageUser/" +
+                      recipientId+"/"+ idMessageFinal+ 
+                      "/.json");
+                  
+                 axios
                     .patch(
-                      "https://getdev-b2c0b.firebaseio.com/company/sly/chatbotCreateMessage/" +
-                      idChat +
-                      "/options/" +
-                      value +
+                      "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/" +
+                      recipientId+"/"+ idMessageFinal+ 
                       "/.json", newData
                     )
                     .then((response) => {
                       console.log('Datos actualizados23:', response.data);
 
-                    });*/
+                    });
 
                   validationMsj(routeMultiple);
                 }
@@ -1005,7 +1007,11 @@ async function sendMsj(
       messageData2
     )
     .then((response) => {
+
+   
       if (response.status == 200) {
+
+      idMessageFinal = response.data.name;
         //validationMsj(response);
 
         /* setTimeout(function () {
@@ -1449,6 +1455,8 @@ async function callSendAPI(messageData) {
 
 
   function executeInit() {
+
+    recipientId 
 
     axios
       .get(
