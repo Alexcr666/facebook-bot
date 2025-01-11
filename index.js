@@ -732,7 +732,7 @@ function validationMsj(value) {
                 opcionesMultiple = [];
 
                 var newData = {
-                  routeStep: routeMultiple,
+                  routeStep: route,
 
                 };
                 axios
