@@ -730,6 +730,21 @@ function validationMsj(value) {
                 console.error("RUTA SELECCIONADA TERMS" + route);
                 repeatMessageOption = false;
                 opcionesMultiple = [];
+
+                var newData = {
+                  routeStep: routeMultiple,
+
+                };
+                axios
+                .patch(
+                  "https://getdev-b2c0b.firebaseio.com/company/sly/messageUsers/" +
+                  recipientId+"/"+ idMessageFinal+ 
+                  "/.json", newData
+                )
+                .then((response) => {
+                  console.log('Datos actualizados23:', response.data);
+
+                });
                 validationMsj(route);
               } else {
                 sendMsj(
