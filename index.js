@@ -239,13 +239,13 @@ var messageGlobal;
 // Incoming events handling
 function receivedMessage(event) {
   var senderID = event.sender.id;
-//recipientID = event.recipient.id;
+recipientID = event.recipient.id;
  
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
   userReceip = senderID;
-//  recipientData = recipientID;
+ recipientData = recipientID;
 
   console.log(
     "Received message for user %d and page %d at %d with message:",
