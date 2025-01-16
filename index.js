@@ -138,6 +138,8 @@ app.post("/webhook", async function (req, res) {
   
             console.log(`Mensaje recibido de ${senderId}: ${text}`);
 
+            recipientId =senderId;
+
             initChatMsj = true;
   
             // Crea el payload para responder
@@ -172,6 +174,8 @@ try{
           const payload = event.postback.payload; // Payload del botón clicado
 
           console.log(`Usuario ${senderId} hizo clic en el botón: ${buttonTitle}`);
+
+          recipientId =senderId;
           console.log(`Payload recibido: ${payload}`);
           messageGlobal = event.postback.payload;
 
@@ -235,8 +239,8 @@ var messageGlobal;
 // Incoming events handling
 function receivedMessage(event) {
   var senderID = event.sender.id;
-recipientID = event.recipient.id;
-  console.log("recipient12-1: "+recipientID );
+//recipientID = event.recipient.id;
+ 
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
@@ -278,8 +282,8 @@ recipientID = event.recipient.id;
 
 function receivedPostback(event) {
   var senderID = event.sender.id;
-recipientID = event.recipient.id;
-  console.log("recipient12-2: "+recipientID );
+//recipientID = event.recipient.id;
+  //console.log("recipient12-2: "+recipientID );
   var timeOfPostback = event.timestamp;
 
   // The 'payload' param is a developer-defined field which is set in a postback
