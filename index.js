@@ -245,7 +245,7 @@ function receivedMessage(event) {
   var message = event.message;
 
   userReceip = senderID;
-  recipientData = recipientID;
+//  recipientData = recipientID;
 
   console.log(
     "Received message for user %d and page %d at %d with message:",
