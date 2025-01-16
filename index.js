@@ -235,7 +235,8 @@ var messageGlobal;
 // Incoming events handling
 function receivedMessage(event) {
   var senderID = event.sender.id;
-  var recipientID = event.recipient.id;
+recipientID = event.recipient.id;
+  console.log("recipient12-1: "+recipientID );
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
@@ -277,7 +278,8 @@ function receivedMessage(event) {
 
 function receivedPostback(event) {
   var senderID = event.sender.id;
-  var recipientID = event.recipient.id;
+recipientID = event.recipient.id;
+  console.log("recipient12-2: "+recipientID );
   var timeOfPostback = event.timestamp;
 
   // The 'payload' param is a developer-defined field which is set in a postback
