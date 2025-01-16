@@ -174,9 +174,9 @@ try{
           const payload = event.postback.payload; // Payload del botón clicado
 
           console.log(`Usuario ${senderId} hizo clic en el botón: ${buttonTitle}`);
+          console.log(`Payload recibido: ${payload}`);
 
           recipientId =senderId;
-          console.log(`Payload recibido: ${payload}`);
           messageGlobal = event.postback.payload;
 
      initChatMsj = true;
@@ -239,13 +239,12 @@ var messageGlobal;
 // Incoming events handling
 function receivedMessage(event) {
   var senderID = event.sender.id;
-recipientID = event.recipient.id;
- 
+  var recipientID = event.recipient.id;
   var timeOfMessage = event.timestamp;
   var message = event.message;
 
   userReceip = senderID;
- recipientData = recipientID;
+  recipientData = recipientID;
 
   console.log(
     "Received message for user %d and page %d at %d with message:",
@@ -282,8 +281,7 @@ recipientID = event.recipient.id;
 
 function receivedPostback(event) {
   var senderID = event.sender.id;
-//recipientID = event.recipient.id;
-  //console.log("recipient12-2: "+recipientID );
+  var recipientID = event.recipient.id;
   var timeOfPostback = event.timestamp;
 
   // The 'payload' param is a developer-defined field which is set in a postback
