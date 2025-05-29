@@ -1011,6 +1011,20 @@ async function sendMsj(
   //if(route != null){
   console.log("-----sendmsj---: " + route);
 
+  if(route  ==undefined || route == null){
+
+      repeatMessageOption = false;
+          sendMsj("No hay mas opciones", "route", type, false);
+          sendMsj("Iniciando chat", "route", type, false);
+
+       
+      
+          setTimeout(function () {
+            repeatChat();
+          
+          }, 1500);
+  }
+
   console.log("routestep1: " + messageText);
   var messageData2 = {
     routeStep: route,
