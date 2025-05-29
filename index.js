@@ -524,6 +524,7 @@ async function sendMultipleButtonTemplates() {
     };
 
     try {
+      console.log("TOKEN:", process.env.PAGE_ACCESS_TOKEN);
       const response = await axios.post(url, payload, {
         params: { access_token:process.env.PAGE_ACCESS_TOKEN },
         headers: { "Content-Type": "application/json" }
